@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Example from '../components/Example';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Container = styled.div`
 function MainPage() {
   return (
     <Container>
-      <h1>메인페이지</h1>
+      <Example />
     </Container>
   );
 }
