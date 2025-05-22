@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import {useState, useEffect} from 'react'
 
 const LongButton = styled.button`
-    width: 350px;
+    width: 353px;
     height: auto;
     align-items: center;
     text-align: center;
