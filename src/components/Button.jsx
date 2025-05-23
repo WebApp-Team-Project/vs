@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import {useState, useEffect} from 'react'
+import '../index.css'
+
 
 const LongButton = styled.button`
     width: 353px;
@@ -11,7 +13,7 @@ const LongButton = styled.button`
     font-weight: bold;
     font-size: 14px;
     color: #fff;
-    background-color: #4F9FEC;
+    background-color:var(--main--color);
     border: none;
     border-radius: 8px;
     padding: 12px 0px;
