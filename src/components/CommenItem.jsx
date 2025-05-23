@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import '../index.css'
 
-function Comment(props){
+function CommentItem(props){
     const {userId, content, date, likes, voteOptionId} = props;
 
     return(
-        <Comment>
+        <CommentItem>
             <div>
                 <h1>&lt;{userId || "익명" }&lt;</h1>
                 <div>
@@ -16,8 +16,8 @@ function Comment(props){
             </div>
             <p>{content || "댓글 내용입니다." }</p>
             <p>{date || "timestamp" }</p>
-        </Comment>
+        </CommentItem>
     )
 }
 
-export default Comment;
+export default CommentItem;

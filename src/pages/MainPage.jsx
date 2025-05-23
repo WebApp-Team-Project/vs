@@ -4,6 +4,7 @@ import Example from '../components/Example';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import CategoryBox from '../components/CategoryBox';
+import CommentItem from '../components/CommenItem';
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ function MainPage() {
   return (
     <Container>
       <Example />
-      <Comment></Comment>
+      <CommentItem></CommentItem>
       <Button>Button</Button>
       <TextInput>입력</TextInput>
     </Container>
