@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
-import './index.css'
+import '../index.css'
 
 const CategoryItem = styled.button`
     width: auto;
@@ -87,4 +87,4 @@ function CategoryBox(props){
     )
 }
 
-export default CategoryBox
+export default CategoryBox;
