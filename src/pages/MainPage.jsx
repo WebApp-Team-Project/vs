@@ -19,6 +19,7 @@ function MainPage() {
   return (
     <Container>
       <Example />
+      <CategoryBox></CategoryBox>
       <CommentItem></CommentItem>
       <Button>Button</Button>
       <TextInput>입력</TextInput>

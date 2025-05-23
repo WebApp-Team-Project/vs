@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import '../index.css'
 
+const CommentItem = styled.div`
+background-color: red;
+`
+
 function CommentItem(props){
     const {userId, content, date, likes, voteOptionId} = props;
 
