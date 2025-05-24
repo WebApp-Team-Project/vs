@@ -7,12 +7,12 @@ const MainDiv = styled.div`
   margin: 0 auto;
 `;
 
-function MainPage() {
+function ProfilePage() {
   return (
     <MainDiv>
-      <h1 style={{ color: '#fff' }}>Main 페이지</h1>
+      <h1 style={{ color: '#fff' }}>Profile 페이지</h1>
     </MainDiv>
   );
 }
 
-export default MainPage;
+export default ProfilePage;
