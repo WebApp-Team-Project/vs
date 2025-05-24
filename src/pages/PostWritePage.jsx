@@ -1,146 +1,147 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import Button from '../components/Button'
-import CategoryBox from '../components/CategoryBox'
-import TextInput from '../components/TextInput'
-
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '../components/Button';
+import CategoryBox from '../components/CategoryBox';
+import TextInput from '../components/TextInput';
 
 const MainDiv = styled.div`
-    width: 393px;
-    height: 852px;
-    background-color: #181818;
-    padding: 40px 20px;
+  width: 393px;
+  height: 852px;
+  background-color: #181818;
+  padding: 40px 20px;
 
-    position: relative;
-`
+  position: relative;
+`;
 
 const HeaderDiv = styled.div`
-    font-family: 'D2Coding', 'Pretendard', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
+  font-family: 'D2Coding', 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
 
-    display: flex;
-    gap: 128px;
-    align-items: center;
-    text-align: center;
-`
+  display: flex;
+  gap: 128px;
+  align-items: center;
+  text-align: center;
+`;
 
 const MainInner = styled.div`
-    width: 353px;
-    display: grid;
-    gap: 32px;
-    margin-top: 40px;
-`
+  width: 353px;
+  display: grid;
+  gap: 32px;
+  margin-top: 40px;
+`;
 
 const WriteDiv = styled.div`
-    width: 353px;
-    font-size: 12px;
-    color: #fff;
-    display: grid;
-    gap: 10px;
-`
+  width: 353px;
+  font-size: 12px;
+  color: #fff;
+  display: grid;
+  gap: 10px;
+`;
 const SelectDiv = styled.div`
-    background-color: #202020;
-    width: 353px;
-    height: auto;
-    border: 1px solid #515151;
-    border-radius: 8px;
+  background-color: #202020;
+  width: 353px;
+  height: auto;
+  border: 1px solid #515151;
+  border-radius: 8px;
 
-    display: grid;
-    gap: 16px;
-    font-size: 12px;
-    font-weight: regular;
-    padding: 16px;
-    color: #fff;
-`
+  display: grid;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: regular;
+  padding: 16px;
+  color: #fff;
+`;
 const SelectOption = styled.div`
-    display: grid;
-    gap: 6px;
-`
+  display: grid;
+  gap: 6px;
+`;
 const ImgDiv = styled.div`
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-`
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+`;
 const ButtonDiv = styled.div`
-    position: absolute;
-    bottom: 40px;
-`
+  position: absolute;
+  bottom: 40px;
+`;
 
-function PostWritePage(props){
-    const [optionCount, setOptionCount] = useState(2);
+function PostWritePage(props) {
+  const [optionCount, setOptionCount] = useState(2);
 
-    const handleAddOption = () => {
-        setOptionCount(optionCount + 1);
-    };
+  const handleAddOption = () => {
+    setOptionCount(optionCount + 1);
+  };
 
-    const renderOptions = () => {
-        const options = [];
-        
-        for (let i = 1; i <= optionCount; i++) {
-            options.push(
-                <SelectOption key={i}>
-                    <label htmlFor="">선택지 {i}</label>
-                    <TextInput type="select"/>
-                </SelectOption>
-            );
-        }
-        
-        return options;
-    };
+  const renderOptions = () => {
+    const options = [];
 
-    return(
-        <MainDiv>
-            <HeaderDiv>
-                <img src="../public/back-icon.png" alt="" height="15px"/>
-                Write Post
-            </HeaderDiv>
-            <MainInner>
-                <WriteDiv>
-                    <label htmlFor="">카테고리</label>
-                    <CategoryBox categories={["<학교>", "<연애>", "<음식>", "<일상>"]}
-                        colorThemes={{
-                            "<학교>": { color: "#51BAF3", border: "#51BAF3" },
-                            "<연애>": { color: "#EB5DE9", border: "#EB5DE9" },
-                            "<음식>": { color: "#EEBA4E", border: "#EEBA4E" },
-                            "<일상>": { color: "#8EE060", border: "#8EE060" },
-                        }} 
-                    onChange={(category) => console.log(category)}/>
-                </WriteDiv>
-                <WriteDiv>
-                    <label htmlFor="">제목</label>
-                    <TextInput text="제목을 작성해주세요!"/>
-                </WriteDiv>
-                <WriteDiv>
-                    <label htmlFor="">내용</label>
-                    <TextInput text="내용을 작성해주세요!"/>
-                </WriteDiv>
-                <WriteDiv>
-                    <label htmlFor="">선택지 입력</label>
-                    
-                    <SelectDiv>
-                        {renderOptions()}
-                        
-                        {/* 선택지가 2개일때만 이미지가 보임 */}
-                        {optionCount < 3 && (
-                            <ImgDiv onClick={handleAddOption}>
-                                <img src="../public/select-add.png" alt="" height="24px"/>
-                            </ImgDiv>
-                        )}
-                    </SelectDiv>
-                </WriteDiv>
-                <WriteDiv>
-                    <label htmlFor="">마감시간</label>
-                    <TextInput text="마감시간을 작성해주세요!"/>
-                </WriteDiv>
-            </MainInner>
+    for (let i = 1; i <= optionCount; i++) {
+      options.push(
+        <SelectOption key={i}>
+          <label htmlFor=''>선택지 {i}</label>
+          <TextInput type='select' />
+        </SelectOption>,
+      );
+    }
 
-            <ButtonDiv>
-                <Button/>
-            </ButtonDiv>
-        </MainDiv>
-    )
+    return options;
+  };
+
+  return (
+    <MainDiv>
+      <HeaderDiv>
+        <img src='/images/back-icon.png' alt='' height='15px' />
+        Write Post
+      </HeaderDiv>
+      <MainInner>
+        <WriteDiv>
+          <label htmlFor=''>카테고리</label>
+          <CategoryBox
+            categories={['<학교>', '<연애>', '<음식>', '<일상>']}
+            colorThemes={{
+              '<학교>': { color: '#51BAF3', border: '#51BAF3' },
+              '<연애>': { color: '#EB5DE9', border: '#EB5DE9' },
+              '<음식>': { color: '#EEBA4E', border: '#EEBA4E' },
+              '<일상>': { color: '#8EE060', border: '#8EE060' },
+            }}
+            onChange={category => console.log(category)}
+          />
+        </WriteDiv>
+        <WriteDiv>
+          <label htmlFor=''>제목</label>
+          <TextInput text='제목을 작성해주세요!' />
+        </WriteDiv>
+        <WriteDiv>
+          <label htmlFor=''>내용</label>
+          <TextInput text='내용을 작성해주세요!' />
+        </WriteDiv>
+        <WriteDiv>
+          <label htmlFor=''>선택지 입력</label>
+
+          <SelectDiv>
+            {renderOptions()}
+
+            {/* 선택지가 2개일때만 이미지가 보임 */}
+            {optionCount < 3 && (
+              <ImgDiv onClick={handleAddOption}>
+                <img src='/images/select-add.png' alt='' height='24px' />
+              </ImgDiv>
+            )}
+          </SelectDiv>
+        </WriteDiv>
+        <WriteDiv>
+          <label htmlFor=''>마감시간</label>
+          <TextInput text='마감시간을 작성해주세요!' />
+        </WriteDiv>
+      </MainInner>
+
+      <ButtonDiv>
+        <Button />
+      </ButtonDiv>
+    </MainDiv>
+  );
 }
 
-export default PostWritePage
+export default PostWritePage;
