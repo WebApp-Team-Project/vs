@@ -9,6 +9,7 @@ const MainDiv = styled.div`
   height: 852px;
   background-color: #181818;
   padding: 40px 20px;
+  margin: 0 auto;
 
   position: relative;
 `;
