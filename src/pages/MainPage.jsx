@@ -1,20 +1,17 @@
 import styled from 'styled-components';
-import Example from '../components/Example';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  color: #fff;
+const MainDiv = styled.div`
+  width: 393px;
+  height: 852px;
+  padding: 40px 20px;
+  margin: 0 auto;
 `;
 
 function MainPage() {
   return (
-    <Container>
-      <Example />
-    </Container>
+    <MainDiv>
+      <h1 style={{ color: '#fff' }}>Main 페이지</h1>
+    </MainDiv>
   );
 }
 
