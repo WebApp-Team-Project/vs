@@ -7,7 +7,6 @@ import TextInput from '../components/TextInput';
 const MainDiv = styled.div`
   width: 393px;
   height: 852px;
-  background-color: #181818;
   padding: 40px 20px;
   margin: 0 auto;
 

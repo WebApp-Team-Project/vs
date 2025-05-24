@@ -1,13 +1,32 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import MainPage from './pages/MainPage';
 import PostWritePage from './pages/PostWritePage';
+import PostViewPage from './pages/PostViewPage';
+import ReviewPage from './pages/ReviewPage';
+import ProfilePage from './pages/ProfilePage';
+import NotificationPage from './pages/NotificationPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* 메인 페이지 (MainPage) */}
         <Route path='/' element={<MainPage />} />
+
+        {/* 게시글 상세 페이지 (PostViewPage) */}
+        <Route path='/post/:id' element={<PostViewPage />} />
+
+        {/* 게시글 작성 페이지 (PostWritePage) */}
         <Route path='/write' element={<PostWritePage />} />
+
+        {/* 후기 페이지 (ReviewPage) */}
+        <Route path='/review' element={<ReviewPage />} />
+
+        {/* 프로필 페이지 (ProfilePage) */}
+        <Route path='/profile' element={<ProfilePage />} />
+
+        {/* 알림 페이지 (NotificationPage) */}
+        <Route path='/notification' element={<NotificationPage />} />
       </Routes>
     </BrowserRouter>
   );
