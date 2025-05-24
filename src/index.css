@@ -26,6 +26,15 @@
     --yellow--color: #EEBA4E;
     --orange--color: #F37B4A;
     --pink--color: #EB5DE9;
+
+    --gray200--color: #B3B3B3;
+    --gray500--color: #505050;
+    --gray600--color: #3D3D3D;
+    --gray800--color: #242424;
+
+    --light--font: #FFFFFF;
+    --gray--font: #6E6E6E;
+    --dark--font: #000000;
     /* --gray900--color: #242424;
     --gray800--color: #333333;
     --gray700--color: #454545;
