@@ -87,4 +87,4 @@ function CategoryBox(props){
     )
 }
 
-export default CategoryBox
+export default CategoryBox;

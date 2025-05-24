@@ -18,6 +18,7 @@ const LongButton = styled.button`
 
   cursor: pointer;
 `;
+
 const ShortButton = styled(LongButton)`
   width: 64px;
   font-size: 12px;

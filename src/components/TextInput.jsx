@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import '../index.css'
 
 const StyledTextArea = styled.textarea`
     background-color: #202020;
