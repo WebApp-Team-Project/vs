@@ -1,32 +1,33 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); */
 @font-face {
-    font-family: 'IBMPlexSansKR-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'IBMPlexSansKR-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'D2Coding';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'D2Coding';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'IBMPlexSansKR-Regular', 'Pretendard', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'IBMPlexSansKR-Regular', 'Pretendard', sans-serif;
 }
 
-:root{
-    --main--color: #4F9FEC;
-    --blue--color: #51BAF3;
-    --green--color: #8EE060;
-    --yellow--color: #EEBA4E;
-    --orange--color: #F37B4A;
-    --pink--color: #EB5DE9;
-    /* --gray900--color: #242424;
+:root {
+  --main--color: #4f9fec;
+  --blue--color: #51baf3;
+  --green--color: #8ee060;
+  --yellow--color: #eeba4e;
+  --orange--color: #f37b4a;
+  --pink--color: #eb5de9;
+  /* --gray900--color: #242424;
     --gray800--color: #333333;
     --gray700--color: #454545;
     --gray600--color: #646464;
@@ -37,27 +38,3 @@
     --gray100--color: #f1f1f1;
     --gray50--color: #fdfdfd; */
 }
-
-html, body{
-    width: 100vw;
-    height: 100vh;
-    background-color: #181818;
-    overflow: hidden;
-}
-
-li{
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
-    color: inherit;
-}
-/* 
-.content_area{
-    background-color: var(--gray100--color);
-    width: 100vw;
-    height: 100vh;
-    padding: 20px 40px 40px 40px;
-    display: flex;
-} */

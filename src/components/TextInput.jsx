@@ -10,7 +10,7 @@ const StyledTextArea = styled.textarea`
     font-size: 11px;
     font-weight: regular;
     padding: 10px 12px;
-    color: #525252;
+    color: #d9d9d9;
     
     resize: none;
     overflow: hidden;
@@ -31,13 +31,25 @@ const StyledTextArea = styled.textarea`
     }
 `
 
+const SelectTextArea = styled(StyledTextArea)`
+    width: 321px;
+    height: 34px;
+    background-color: #505050;
+    border: 1px solid #6e6e6e;
+`
+
 function TextInput(props){
     // height: 높이, value & onChange: 제어 컴포넌트용
     const {height, value, onChange, text} = props
 
-    return (
-        <StyledTextArea height={height || 34} placeholder={text || "입력하세요"} value={value} onChange={onChange}></StyledTextArea>
-    )
+    const type = props.type || "origin"
+    if(type === "origin"){
+        return <StyledTextArea height={height || 34} placeholder={text || "입력하세요"} value={value} onChange={onChange}>
+        </StyledTextArea>
+    }else if(type === "select"){
+        return <SelectTextArea placeholder={text || " "} value={value} onChange={onChange}>
+        </SelectTextArea>
+    }
 }
 
 export default TextInput
