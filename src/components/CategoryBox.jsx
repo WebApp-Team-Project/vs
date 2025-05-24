@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
-import './index.css'
+import '../index.css'
 
 const CategoryItem = styled.button`
     width: auto;
@@ -36,10 +36,10 @@ function CategoryBox(props){
     
     // 기본 색상 테마 정의
     const defaultColorThemes = {
-        "<전체>": { color: "#F37B4A", border: "#F37B4A" },
-        "<학교>": { color: "#51BAF3", border: "#51BAF3" },
-        "<연애>": { color: "#EB5DE9", border: "#EB5DE9" },
-        "<음식>": { color: "#EEBA4E", border: "#EEBA4E" },
+        "<전체>": { color: "var(--blue--color)", border: "var(--blue--color)" },
+        "<학교>": { color: "var(--green--color)", border: "var(--green--color)" },
+        "<연애>": { color: "var(--pink--color)", border: "var(--pink--color)" },
+        "<음식>": { color: "var(--yellow--color)", border: "var(--yellow--color)" },
         "<일상>": { color: "#8EE060", border: "#8EE060" },
     };
     
@@ -87,4 +87,4 @@ function CategoryBox(props){
     )
 }
 
-export default CategoryBox
+export default CategoryBox;
