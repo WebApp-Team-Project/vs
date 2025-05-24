@@ -4,7 +4,8 @@ import Example from '../components/Example';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import CategoryBox from '../components/CategoryBox';
-import CommentItem from '../components/CommenItem';
+import CommentItem from '../components/CommentItem';
+import VoteContainer from '../components/VoteContainer';
 
 const Container = styled.div`
   display: flex;
@@ -23,6 +24,8 @@ function MainPage() {
       <CommentItem></CommentItem>
       <Button>Button</Button>
       <TextInput>입력</TextInput>
+
+      <VoteContainer></VoteContainer>
     </Container>
   );
 }
