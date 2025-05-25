@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import '../index.css';
+
+import CategoryBox from '../components/CategoryBox';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -7,10 +10,20 @@ const MainDiv = styled.div`
   margin: 0 auto;
 `;
 
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 function MainPage() {
   return (
     <MainDiv>
-      <h1 style={{ color: '#fff' }}>Main 페이지</h1>
+      <h1 className='h1_title'>Today_issue</h1>
+
+      <Wrap>
+        <h1 className='h1_title'>Community</h1>
+        <CategoryBox></CategoryBox>
+      </Wrap>
     </MainDiv>
   );
 }
