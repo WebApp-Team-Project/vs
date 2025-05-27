@@ -5,6 +5,7 @@
   font-weight: normal;
   font-style: normal;
 }
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @font-face {
   font-family: 'D2Coding';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff')
@@ -24,7 +25,7 @@
   --main--color: #4f9fec;
   --blue--color: #51baf3;
   --green--color: #8ee060;
-  --yellow--color: #EEBA4E;
+  --yellow--color: #eeba4e;
   --orange--color: #f37b4a;
   --pink--color: #eb5de9;
 
@@ -50,7 +51,7 @@
     --gray50--color: #fdfdfd; */
 }
 
-.h1_title{
+.h1_title {
   color: var(--light--font);
   font-size: 14px;
 }

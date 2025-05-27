@@ -8,7 +8,7 @@ const LongButton = styled.button`
   align-items: center;
   text-align: center;
 
-  font-family: 'D2Coding', 'Pretendard', sans-serif;
+  font-family: 'IBM Plex Sans KR', 'Pretendard', sans-serif;
   font-weight: 700;
   font-size: 14px;
   color: #fff;
