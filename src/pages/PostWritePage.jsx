@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 import Button from '../components/Button';
 import CategoryBox from '../components/CategoryBox';
 import TextInput from '../components/TextInput';
+import HeaderContainer from '../components/HeaderContainer';
+
+import { createPost } from '../services/posts';
+
+import { Timestamp } from 'firebase/firestore';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -11,18 +18,6 @@ const MainDiv = styled.div`
   margin: 0 auto;
 
   position: relative;
-`;
-
-const HeaderDiv = styled.div`
-  font-family: 'D2Coding', 'Pretendard', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-
-  display: flex;
-  gap: 128px;
-  align-items: center;
-  text-align: center;
 `;
 
 const MainInner = styled.div`
@@ -63,12 +58,42 @@ const ImgDiv = styled.div`
   cursor: pointer;
 `;
 const ButtonDiv = styled.div`
+  width: 353px;
   position: absolute;
   bottom: 40px;
 `;
 
 function PostWritePage(props) {
+  const navigate = useNavigate();
+
   const [optionCount, setOptionCount] = useState(2);
+
+  const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [deadline, setDeadline] = useState(''); // 문자열로 입력받고 Timestamp로 변환
+
+
+  const writePost = async () => {
+    try {
+      const postData = {
+        authorUid: '테스트유저', // 실제 로그인된 사용자 UID로 교체 필요
+        category: category,
+        title: title,
+        content: content,
+        options: Array(optionCount).fill('').map((_, i) => `선택지 ${i + 1}`), // 나중에 선택지 TextInput에서 값 가져오면 수정
+        deadline: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000 * 3)), // 3시간 후
+      };
+  
+      await createPost(postData);
+  
+      alert('글이 등록되었습니다!');
+      navigate('/'); 
+    } catch (e) {
+      console.error('글 작성 중 오류:', e);
+    }
+  };
+  
 
   const handleAddOption = () => {
     setOptionCount(optionCount + 1);
@@ -91,10 +116,7 @@ function PostWritePage(props) {
 
   return (
     <MainDiv>
-      <HeaderDiv>
-        <img src='/images/back-icon.png' alt='' height='15px' />
-        Write Post
-      </HeaderDiv>
+        <HeaderContainer type="pages" title="Write Post"></HeaderContainer>
       <MainInner>
         <WriteDiv>
           <label htmlFor=''>카테고리</label>
@@ -111,11 +133,11 @@ function PostWritePage(props) {
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>제목</label>
-          <TextInput text='제목을 작성해주세요!' />
+          <TextInput text='제목을 작성해주세요!' value={title} onChange={(e) => setTitle(e.target.value)}/>
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>내용</label>
-          <TextInput text='내용을 작성해주세요!' />
+          <TextInput text='내용을 작성해주세요!' value={content} onChange={(e) => setContent(e.target.value)} />
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>선택지 입력</label>
@@ -138,7 +160,7 @@ function PostWritePage(props) {
       </MainInner>
 
       <ButtonDiv>
-        <Button />
+        <Button  onClick={writePost}/>
       </ButtonDiv>
     </MainDiv>
   );

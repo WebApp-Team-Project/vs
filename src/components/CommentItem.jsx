@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import '../index.css';
 
 const CommentItemContainer = styled.div`
-  width: 393px;
+  width: 100%;
   padding: 12px 30px;
 
   border-bottom: 0.5px solid #505050;
@@ -24,7 +24,8 @@ const Container = styled.div`
 
 const UserName = styled.h1`
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 700;
+  color: ${props => props.voteOptionId || '#FFFFFF'}
 `;
 
 const IconBox = styled.div`
@@ -33,16 +34,22 @@ const IconBox = styled.div`
 
   p {
     font-size: 10px;
-    font-weight: bold;
+    color: var(--gray--font);
+    font-weight: 700;
   }
 `;
 
 const Content = styled.p`
   font-size: 11px;
+  color: var(--light--font);
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
 `;
 
 const TimeStamp = styled.p`
   font-size: 6px;
+  font-weight: 400;
+  color: var(--gray--font);
 `;
 
 function CommentItem(props) {
@@ -54,7 +61,7 @@ function CommentItem(props) {
         <div>
           <UserName>&lt;{userId || '익명1'}&gt;</UserName>
           <IconBox>
-            <img src='따봉아이콘' />
+            <img src='/images/icon_like.svg'/>
             <p>{likes || '0'}</p>
           </IconBox>
         </div>

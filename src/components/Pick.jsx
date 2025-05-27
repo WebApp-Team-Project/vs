@@ -4,6 +4,8 @@ import '../index.css';
 const PickDiv = styled.div`
     width: 353px;
     height: auto;
+
+    margin-top: 34px; margin-bottom: 34px;
 `
 
 const PickHeader = styled.div`
@@ -17,6 +19,8 @@ const PickHeader = styled.div`
 
     text-align: center;
     margin-bottom: 8px;
+
+    align-items: center;
 `
 
 const PickChip = styled.div`

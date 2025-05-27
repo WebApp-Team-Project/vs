@@ -1,13 +1,50 @@
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
+import { fetchComments } from '../services/comments';
+
 import '../index.css';
-import CommentItem from "./CommenItem";
+import CommentItem from "./CommentItem";
 
 function CommentItemlist(props){
 
-    return{
+    const {postId} = props;
 
-    }
+const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const loadComments = async () => {
+      const data = await fetchComments(postId);
+      setComments(data);
+    };
+
+    loadComments();
+  }, [postId]);
+
+  return (
+    <div>
+      {comments.map((comment) => (
+        <CommentItem
+          key={comment.id}
+          userId={comment.authorUid}
+          content={comment.content}
+          timestamp={formatTimestamp(comment.createdAt)}
+          likes={comment.likes}
+          voteOptionId={comment.voteOptionId}
+        />
+      ))}
+    </div>
+  );
+}
+
+// timestamp 형식 바꿔주는 함수 (Firebase Timestamp → 보기 좋게)
+function formatTimestamp(ts) {
+  if (!ts?.toDate) return '방금 전';
+  const date = ts.toDate();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  return `${month}/${day} ${hour}:${minute}`;
 }
 
 export default CommentItemlist

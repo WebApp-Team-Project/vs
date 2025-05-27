@@ -9,23 +9,30 @@ const Container = styled.div`
   gap: 10px;
   padding: 12px;
   border-radius: 8px;
-  background-color: var(--gray600--color);
-  border: 1px solid var(--gray200--color);
+  background-color: var(--gray800--color);
+  border: 1px solid var(--outline--color);
 `;
 
 const VoteOption = styled.div`
-  padding: 10px;
-  background-color: var(--gray500--color);
+  padding: 8px 20px;
+  background-color: var(--gray600--color);
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+    color: var(--font-font_light, #FFF);
+    font-family: "IBM Plex Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   &:hover {
-    background-color: #ddd;
+    background-color: ${props => props.color || '#FFFFFF'};
   }
 `;
 
 const FlexBox =styled.span`
     display:flex;
+    justify-content: space-between;
+    align-items: center;    
 
     h1{
     font-size: 12px;
@@ -35,30 +42,68 @@ const FlexBox =styled.span`
     font-size: 10px;}
 `
 
+const Imgspan = styled.span`
+color: var(--light--font);
+
+display: flex;
+align-items: center;
+gap: 4px;
+
+h1{font-family: "IBM Plex Sans";
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;}
+
+h2{
+font-family: "IBM Plex Sans";
+font-size: 10px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+`
+
+const Imgspan2 = styled.span`
+color: var(--light--font);
+
+display: flex;
+align-items: center;
+gap: 2.5px;
+
+h3{
+color: var(--gray2, #7D7D7D);
+font-family: "IBM Plex Sans";
+font-size: 6.4px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;}
+`
+
 function VoteContainer(props){
 
     return(
         <Container>
             <FlexBox>
-                <FlexBox>
-                    <img></img>
+                <Imgspan>
+                    <img src="/images/icon_vote.svg"/>
                     <h1>투표</h1>
-                </FlexBox>
-                <FlexBox>
-                    <img alt="img"></img>
+                </Imgspan>
+                <Imgspan>
+                    <img src="/images/icon_clock.png"/>
                     <h2>3시간 남음</h2>
-                </FlexBox>
+                </Imgspan>
             </FlexBox>
 
             <VoteOption>트랩</VoteOption>
             <VoteOption>니뽕내뽕</VoteOption>
 
-            <Button title="투표하기"></Button>
+            <Button type="long" title="투표하기"></Button>
 
-            <FlexBox>
-                    <img></img>
-                    <h1>3,000</h1>
-                </FlexBox>
+            <Imgspan2>
+                <img src="/images/icon_people.svg"/>
+                <h3>3,000</h3>
+            </Imgspan2>
 
         </Container>
     )
