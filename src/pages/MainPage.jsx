@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import '../index.css';
 
 import CategoryBox from '../components/CategoryBox';
+import PostItem from '../components/PostItem';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -23,6 +24,7 @@ function MainPage() {
       <Wrap>
         <h1 className='h1_title'>Community</h1>
         <CategoryBox></CategoryBox>
+        <PostItem></PostItem>
       </Wrap>
     </MainDiv>
   );
