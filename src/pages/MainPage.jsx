@@ -7,7 +7,8 @@ import PostList from '../components/PostList';
 import HeaderContainer from '../components/HeaderContainer';
 import Button from '../components/Button';
 
-import { fetchPostsByStatusAndCategory } from '../services/posts';
+import { createPost, fetchPostsByStatusAndCategory } from '../services/posts';
+import { Timestamp } from 'firebase/firestore';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -19,21 +20,21 @@ const MainDiv = styled.div`
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap:16px;
-`
+  gap: 16px;
+`;
 
 function MainPage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const loadPosts = async () => {
-      const result = await fetchPostsByStatusAndCategory({
-        status: 'open',
-        category: '전체',
+    fetchPostsByStatusAndCategory({ status: 'open', category: '전체' })
+      .then(result => {
+        setPosts(result);
+        console.log(result);
+      })
+      .catch(error => {
+        console.error('글 조회 중 오류:', error);
       });
-      setPosts(result);
-    };
-    loadPosts();
   }, []);
 
   return (
@@ -44,10 +45,10 @@ function MainPage() {
       <Wrap>
         <h1 className='h1_title'>Community</h1>
         <CategoryBox></CategoryBox>
-        <PostList posts={posts} ></PostList>
+        <PostList posts={posts}></PostList>
       </Wrap>
 
-      <Button type="icon" to="/write"></Button>
+      <Button type='icon' to='/write'></Button>
     </MainDiv>
   );
 }
