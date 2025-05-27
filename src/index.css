@@ -47,3 +47,8 @@
     --gray100--color: #f1f1f1;
     --gray50--color: #fdfdfd; */
 }
+
+.h1_title{
+  color: var(--light--font);
+  font-size: 14px;
+}
