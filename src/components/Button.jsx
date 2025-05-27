@@ -21,11 +21,11 @@ const LongButton = styled.button`
 `;
 
 const ShortButton = styled(LongButton)`
+  display: flex;
   width: 64px;
   height: 32px;
   padding: 12px 20px;
   justify-content: center;
-  text-align:center;
   align-items: center;
   font-size: 12px;
 `;
@@ -38,8 +38,8 @@ const WriteButton = styled(LongButton)`
 const IconButton = styled(LongButton)`
   width: 52px;
   height: 52px;
-  border-radius:100px;
-`
+  border-radius: 100px;
+`;
 
 function Button(props) {
   const navigate = useNavigate();
@@ -52,18 +52,15 @@ function Button(props) {
     }
   };
 
-
   const type = props.type || 'long';
 
   if (type === 'long') {
     return (
-      <LongButton  onClick={handleClick}>{props.title || 'Upload'}</LongButton>
+      <LongButton onClick={handleClick}>{props.title || 'Upload'}</LongButton>
     );
   } else if (type === 'short') {
     return (
-      <ShortButton onClick={handleClick}>
-        {props.title || 'Upload'}
-      </ShortButton>
+      <ShortButton onClick={handleClick}>{props.title || 'Upload'}</ShortButton>
     );
   } else if (type === 'write') {
     return (
@@ -74,9 +71,9 @@ function Button(props) {
   } else if (type === 'icon') {
     return (
       <IconButton onClick={handleClick}>
-        <img src='/images/icon_writing.svg'  style={{ pointerEvents: 'none' }} />
+        <img src='/images/icon_writing.svg' style={{ pointerEvents: 'none' }} />
       </IconButton>
-    )
+    );
   }
 }
 
