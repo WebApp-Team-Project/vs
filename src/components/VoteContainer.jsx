@@ -25,7 +25,7 @@ const VoteOption = styled.div`
     font-weight: 700;
     line-height: normal;
   &:hover {
-    background-color: #ddd;
+    background-color: ${props => props.color || '#FFFFFF'};
   }
 `;
 

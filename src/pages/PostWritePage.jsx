@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../components/Button';
 import CategoryBox from '../components/CategoryBox';
 import TextInput from '../components/TextInput';
+import HeaderContainer from '../components/HeaderContainer';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -11,18 +12,6 @@ const MainDiv = styled.div`
   margin: 0 auto;
 
   position: relative;
-`;
-
-const HeaderDiv = styled.div`
-  font-family: 'D2Coding', 'Pretendard', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-
-  display: flex;
-  gap: 128px;
-  align-items: center;
-  text-align: center;
 `;
 
 const MainInner = styled.div`
@@ -63,6 +52,7 @@ const ImgDiv = styled.div`
   cursor: pointer;
 `;
 const ButtonDiv = styled.div`
+  width: 353px;
   position: absolute;
   bottom: 40px;
 `;
@@ -91,10 +81,7 @@ function PostWritePage(props) {
 
   return (
     <MainDiv>
-      <HeaderDiv>
-        <img src='/images/back-icon.png' alt='' height='15px' />
-        Write Post
-      </HeaderDiv>
+        <HeaderContainer type="pages" title="Write Post"></HeaderContainer>
       <MainInner>
         <WriteDiv>
           <label htmlFor=''>카테고리</label>
@@ -138,7 +125,7 @@ function PostWritePage(props) {
       </MainInner>
 
       <ButtonDiv>
-        <Button />
+        <Button/>
       </ButtonDiv>
     </MainDiv>
   );

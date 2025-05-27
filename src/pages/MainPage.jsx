@@ -4,6 +4,7 @@ import '../index.css';
 import CategoryBox from '../components/CategoryBox';
 import PostList from '../components/PostList';
 import HeaderContainer from '../components/HeaderContainer';
+import Button from '../components/Button';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -29,6 +30,8 @@ function MainPage() {
         <CategoryBox></CategoryBox>
         <PostList></PostList>
       </Wrap>
+
+      <Button type="icon" to="/write"></Button>
     </MainDiv>
   );
 }
