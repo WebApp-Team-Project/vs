@@ -9,7 +9,7 @@ const LongButton = styled.button`
   text-align: center;
 
   font-family: 'D2Coding', 'Pretendard', sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
   color: #fff;
   background-color: var(--main--color);

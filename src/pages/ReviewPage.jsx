@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
+import HeaderContainer from '../components/HeaderContainer';
 import '../index.css';
 
 import { useState, useEffect } from "react";
@@ -11,18 +12,6 @@ const MainDiv = styled.div`
   height: 852px;
   padding: 40px 20px;
   margin: 0 auto;
-`;
-
-const HeaderDiv = styled.div`
-  font-family: 'D2Coding', 'Pretendard', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-
-  display: flex;
-  gap: 144.5px;
-  align-items: center;
-  text-align: center;
 `;
 
 const MainInner = styled.div`
@@ -41,6 +30,7 @@ const WriteDiv = styled.div`
 `;
 
 const ButtonDiv = styled.div`
+  width: 353px;
   position: absolute;
   bottom: 40px;
 `;
@@ -78,10 +68,7 @@ function ReviewPage() {
 
   return (
     <MainDiv>
-      <HeaderDiv>
-        <img src='/images/back-icon.png' alt='' height='15px' />
-        Review
-      </HeaderDiv>
+        <HeaderContainer type="pages" title="Review"></HeaderContainer>
       <MainInner>
         <WriteDiv>
           <label htmlFor=''>나의 PICK</label>
@@ -108,7 +95,7 @@ function ReviewPage() {
       </MainInner>
 
       <ButtonDiv>
-        <Button />
+        <Button type="long"/>
       </ButtonDiv>
     </MainDiv>
   );

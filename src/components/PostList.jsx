@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styled from "styled-components";
-import { fetchPostsByStatusAndCategory } from '../services/posts';
 import '../index.css';
 
 import PostItem from './PostItem';
@@ -11,21 +10,7 @@ flex-direction:column;
 gap:16px;
 `
 
-function PostList() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const loadPosts = async () => {
-      const data = await fetchPostsByStatusAndCategory({
-        status: 'open',
-        category: '전체',
-      });
-      setPosts(data);
-    };
-
-    loadPosts();
-  }, []);
-
+function PostList({posts}) {
   return (
     <Container>
       {posts.map(post => (

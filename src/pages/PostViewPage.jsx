@@ -34,6 +34,8 @@ function PostViewPage() {
       <HeaderContainer type='pages' title='Community'></HeaderContainer>
       <Post></Post>
       <VoteContainer></VoteContainer>
+
+      <Button type="long" title="Review Commit" to="/review"></Button>
       
       <Pick></Pick>
 
