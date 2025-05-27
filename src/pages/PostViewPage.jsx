@@ -11,8 +11,8 @@ import Pick from '../components/Pick';
 
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
-
-
+import { useEffect } from 'react';
+import { addComment } from '../services/comments';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -22,9 +22,9 @@ const MainDiv = styled.div`
 `;
 
 const CommentUpload = styled.div`
-  display:flex;
+  display: flex;
   gap: 6px;
-`
+`;
 
 function PostViewPage() {
   const { id } = useParams(); // postId 가져오기
@@ -35,16 +35,16 @@ function PostViewPage() {
       <Post></Post>
       <VoteContainer></VoteContainer>
 
-      <Button type="long" title="Review Commit" to="/review"></Button>
-      
+      <Button type='long' title='Review Commit' to='/review'></Button>
+
       <Pick></Pick>
 
       <CommentItem></CommentItem>
       <CommentItemlist postId={id}></CommentItemlist>
 
       <CommentUpload>
-      <TextInput></TextInput>
-      <Button type='short' title="Commit"></Button>
+        <TextInput></TextInput>
+        <Button type='short' title='Commit'></Button>
       </CommentUpload>
     </MainDiv>
   );
