@@ -36,6 +36,9 @@ const WriteButton = styled(LongButton)`
 `;
 
 const IconButton = styled(LongButton)`
+  position: absolute;
+  bottom: 40px;
+  right: 30px;
   width: 52px;
   height: 52px;
   border-radius: 100px;
