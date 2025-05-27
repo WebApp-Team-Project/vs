@@ -3,6 +3,7 @@ import '../index.css';
 
 import CategoryBox from '../components/CategoryBox';
 import PostList from '../components/PostList';
+import HeaderContainer from '../components/HeaderContainer';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -10,18 +11,6 @@ const MainDiv = styled.div`
   padding: 40px 20px;
   margin: 0 auto;
 `;
-
-const Header = styled.div`
-display:flex;
-justify-content: space-between;
-align-items: center;
-`
-
-const HeaderIcon = styled.div`
-display: inline-flex;
-align-items: center;
-gap:14px;
-`
 
 const Wrap = styled.div`
   display: flex;
@@ -32,16 +21,7 @@ const Wrap = styled.div`
 function MainPage() {
   return (
     <MainDiv>
-      <Header>
-        <div>
-          <img/>
-        </div>
-        <HeaderIcon>
-          <img src='/images/icon_search.svg' />
-          <img src='/images/icon_alert.svg' />
-          <img src='/images/icon_profile.svg' />
-        </HeaderIcon>
-      </Header>
+      <HeaderContainer></HeaderContainer>
       <h1 className='h1_title'>Today_issue</h1>
 
       <Wrap>

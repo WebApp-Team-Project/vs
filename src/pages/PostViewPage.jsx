@@ -1,6 +1,10 @@
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+
 import VoteContainer from '../components/VoteContainer';
 import CommentItem from '../components/CommentItem';
+import CommentItemlist from '../components/CommentItemList';
+import HeaderContainer from '../components/HeaderContainer';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -10,11 +14,14 @@ const MainDiv = styled.div`
 `;
 
 function PostViewPage() {
+  const { id } = useParams(); // postId 가져오기
+
   return (
     <MainDiv>
-      <h1 style={{ color: '#fff' }}>PostView 페이지</h1>
+      <HeaderContainer type='pages' title='Community'></HeaderContainer>
       <VoteContainer></VoteContainer>
       <CommentItem></CommentItem>
+      <CommentItemlist postId={id}></CommentItemlist>
     </MainDiv>
   );
 }
