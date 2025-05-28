@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 function PostList(props) {
-  const { posts, colorThemes } = props;
+  const { posts, colorThemes, status } = props;
 
   return (
     <Container>
@@ -27,6 +27,7 @@ function PostList(props) {
           commentsCount={post.commentsCount}
           colorTheme={colorThemes[post.category]}
           review={post.review}
+          $status={status}
         />
       ))}
     </Container>

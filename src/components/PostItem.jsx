@@ -42,8 +42,9 @@ const Maindiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-
   margin: 13px 0px;
+  color: ${({ $status }) =>
+    $status === 'open' ? 'var(--light--font)' : '#7d7d7d'};
 
   h1 {
     font-size: 16px;
@@ -121,6 +122,7 @@ function PostItem(props) {
     commentsCount,
     review,
     colorTheme,
+    $status,
   } = props;
 
   return (
@@ -128,12 +130,12 @@ function PostItem(props) {
       <ContentContainer>
         <Topdiv>
           <h2 style={{ color: colorTheme.color }}>&lt;{category}&gt;</h2>
-          <Imgspan>
+          <Imgspan $status={$status}>
             <img src='/images/icon_clock.png'></img>
             <h3>{timelimit}</h3>
           </Imgspan>
         </Topdiv>
-        <Maindiv>
+        <Maindiv $status={$status}>
           <h1>{title}</h1>
           <p>{content}</p>
         </Maindiv>

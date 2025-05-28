@@ -191,7 +191,11 @@ function MainPage() {
           categories={CATEGORY_LIST}
           colorThemes={COLOR_THEME}
         />
-        <PostList posts={posts} colorThemes={COLOR_THEME}></PostList>
+        <PostList
+          posts={posts}
+          colorThemes={COLOR_THEME}
+          status={status}
+        ></PostList>
       </Wrap>
 
       {/* 글 작성 버튼 */}
