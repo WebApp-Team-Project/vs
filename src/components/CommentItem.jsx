@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import '../index.css';
+import dayjs from 'dayjs';
 
 const CommentItemContainer = styled.div`
   width: 100%;
@@ -25,7 +26,7 @@ const Container = styled.div`
 const UserName = styled.h1`
   font-size: 11px;
   font-weight: 700;
-  color: ${props => props.voteOptionId || '#FFFFFF'}
+  color: ${props => props.voteOptionId || '#FFFFFF'};
 `;
 
 const IconBox = styled.div`
@@ -42,7 +43,7 @@ const IconBox = styled.div`
 const Content = styled.p`
   font-size: 11px;
   color: var(--light--font);
-  font-family: "IBM Plex Sans";
+  font-family: 'IBM Plex Sans';
   font-weight: 400;
 `;
 
@@ -53,21 +54,32 @@ const TimeStamp = styled.p`
 `;
 
 function CommentItem(props) {
-  const { userId, content, timestamp, likes, voteOptionId } = props;
+  const { userId, content, timestamp, likes, voteOptionId, index } = props;
+
+  // timestamp를 Date 객체로 변환
+  const date = timestamp?.toDate
+    ? timestamp.toDate()
+    : timestamp
+      ? new Date(timestamp)
+      : null;
+  const dateStr = date ? dayjs(date).format('MM/DD') : ''; // 날짜
+  const timeStr = date ? dayjs(date).format('HH:mm') : ''; // 시간
 
   return (
     <CommentItemContainer>
       <Container>
         <div>
-          <UserName>&lt;{userId || '익명1'}&gt;</UserName>
+          <UserName>{`{ 익명${index + 1} }`}</UserName>
           <IconBox>
-            <img src='/images/icon_like.svg'/>
+            <img src='/images/icon_like.svg' />
             <p>{likes || '0'}</p>
           </IconBox>
         </div>
         <Content>{content || '댓글 내용입니다.'}</Content>
         <div>
-          <TimeStamp>{timestamp || '5/23 17:54'}</TimeStamp>
+          <TimeStamp>
+            {dateStr} {timeStr}
+          </TimeStamp>
         </div>
       </Container>
     </CommentItemContainer>

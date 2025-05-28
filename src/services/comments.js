@@ -45,8 +45,6 @@ export const addComment = async (postId, content, uid) => {
       message: `익명 님이 댓글을 작성했습니다.`,
     });
   }
-
-  return true;
 };
 
 // 댓글 삭제 API (필요시)

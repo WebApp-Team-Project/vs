@@ -7,14 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import NotificationPage from './pages/NotificationPage';
 import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-function setUidToLocalStorage(uid) {
-  const existingUid = localStorage.getItem('uid');
-  if (!existingUid) {
-    localStorage.setItem('uid', uid);
-    console.log(`uid 저장: ${uid}`);
-  }
-}
+import { setUidToLocalStorage } from './libs/user';
 
 function App() {
   useEffect(() => {

@@ -1,30 +1,16 @@
-import styled from "styled-components";
-import { useState, useEffect } from 'react';
-import { fetchComments } from '../services/comments';
-
 import '../index.css';
-import CommentItem from "./CommentItem";
+import CommentItem from './CommentItem';
 
-function CommentItemlist(props){
-
-    const {postId} = props;
-
-const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    const loadComments = async () => {
-      const data = await fetchComments(postId);
-      setComments(data);
-    };
-
-    loadComments();
-  }, [postId]);
+function CommentItemlist(props) {
+  const { comments } = props;
 
   return (
-    <div>
-      {comments.map((comment) => (
+    <>
+      {comments?.map((comment, index) => (
         <CommentItem
           key={comment.id}
+          id={comment.id}
+          index={index}
           userId={comment.authorUid}
           content={comment.content}
           timestamp={formatTimestamp(comment.createdAt)}
@@ -32,7 +18,7 @@ const [comments, setComments] = useState([]);
           voteOptionId={comment.voteOptionId}
         />
       ))}
-    </div>
+    </>
   );
 }
 
@@ -47,4 +33,4 @@ function formatTimestamp(ts) {
   return `${month}/${day} ${hour}:${minute}`;
 }
 
-export default CommentItemlist
+export default CommentItemlist;

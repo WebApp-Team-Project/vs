@@ -42,6 +42,11 @@ const IconButton = styled(LongButton)`
   width: 52px;
   height: 52px;
   border-radius: 100px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--blue--color);
+  }
 `;
 
 function Button(props) {

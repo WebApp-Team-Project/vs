@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import HeaderContainer from '../components/HeaderContainer';
 import { createPost } from '../services/posts';
 
 import { Timestamp } from 'firebase/firestore';
+import { getUidFromLocalStorage } from '../libs/user';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -73,27 +74,32 @@ function PostWritePage(props) {
   const [content, setContent] = useState('');
   const [deadline, setDeadline] = useState(''); // 문자열로 입력받고 Timestamp로 변환
 
-
+  // 업로드 버튼 클릭 핸들러
   const writePost = async () => {
-    try {
-      const postData = {
-        authorUid: '테스트유저', // 실제 로그인된 사용자 UID로 교체 필요
-        category: category,
-        title: title,
-        content: content,
-        options: Array(optionCount).fill('').map((_, i) => `선택지 ${i + 1}`), // 나중에 선택지 TextInput에서 값 가져오면 수정
-        deadline: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000 * 3)), // 3시간 후
-      };
-  
-      await createPost(postData);
-  
-      alert('글이 등록되었습니다!');
-      navigate('/'); 
-    } catch (e) {
-      console.error('글 작성 중 오류:', e);
+    const authorUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
+
+    if (!category || !title || !content) {
+      alert('내용을 모두 작성해주세요!');
+      return;
     }
+
+    // 글 작성 API 호출
+    createPost({
+      authorUid,
+      category: '학교',
+      title,
+      content,
+      options: ['함돈', '트랩'],
+      deadline: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000 * 12)),
+    })
+      .then(() => {
+        alert('글이 등록되었습니다!');
+        navigate('/');
+      })
+      .catch(e => {
+        console.error('글 작성 중 오류:', e);
+      });
   };
-  
 
   const handleAddOption = () => {
     setOptionCount(optionCount + 1);
@@ -116,7 +122,7 @@ function PostWritePage(props) {
 
   return (
     <MainDiv>
-        <HeaderContainer type="pages" title="Write Post"></HeaderContainer>
+      <HeaderContainer type='pages' title='Write Post'></HeaderContainer>
       <MainInner>
         <WriteDiv>
           <label htmlFor=''>카테고리</label>
@@ -128,16 +134,26 @@ function PostWritePage(props) {
               '<음식>': { color: '#EEBA4E', border: '#EEBA4E' },
               '<일상>': { color: '#8EE060', border: '#8EE060' },
             }}
-            onChange={category => console.log(category)}
+            onChange={category => {
+              setCategory(category.replace(/[<>]/g, ''));
+            }}
           />
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>제목</label>
-          <TextInput text='제목을 작성해주세요!' value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <TextInput
+            text='제목을 작성해주세요!'
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>내용</label>
-          <TextInput text='내용을 작성해주세요!' value={content} onChange={(e) => setContent(e.target.value)} />
+          <TextInput
+            text='내용을 작성해주세요!'
+            value={content}
+            onChange={e => setContent(e.target.value)}
+          />
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>선택지 입력</label>
@@ -160,7 +176,7 @@ function PostWritePage(props) {
       </MainInner>
 
       <ButtonDiv>
-        <Button  onClick={writePost}/>
+        <Button onClick={writePost} />
       </ButtonDiv>
     </MainDiv>
   );
