@@ -5,8 +5,26 @@ import PostViewPage from './pages/PostViewPage';
 import ReviewPage from './pages/ReviewPage';
 import ProfilePage from './pages/ProfilePage';
 import NotificationPage from './pages/NotificationPage';
+import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+function setUidToLocalStorage(uid) {
+  const existingUid = localStorage.getItem('uid');
+  if (!existingUid) {
+    localStorage.setItem('uid', uid);
+    console.log(`uid 저장: ${uid}`);
+  }
+}
 
 function App() {
+  useEffect(() => {
+    const uid = localStorage.getItem('uid');
+    if (!uid) {
+      const newUid = uuidv4();
+      setUidToLocalStorage(newUid);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
