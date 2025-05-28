@@ -95,9 +95,9 @@ function MainPage() {
             <span>8시간 풀강</span>
             <p>NO 식사시간 무한강의</p>
           </TodayIssueBox>
-          <TodayIssueLogo>
+          {/* <TodayIssueLogo>
             <img src='/images/icon_logo.svg' alt='로고' />
-          </TodayIssueLogo>
+          </TodayIssueLogo> */}
         </TodayIssueBoxWrap>
       </Wrap>
 
