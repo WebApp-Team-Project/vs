@@ -70,7 +70,7 @@ function PostItem(props){
             <Topdiv>
                 <h2>&lt;{category || "음식"}&gt;</h2>
                 <Imgspan>
-                    <img src="/images/icon_clock.png"></img>
+                    <img src="/images/icon_clock_gray.svg"></img>
                     <h3>{ timelimit ||"3시간 남음"}</h3>
                 </Imgspan>
             </Topdiv>
@@ -80,7 +80,7 @@ function PostItem(props){
             </Maindiv>
             <Bottomdiv>
                 <Imgspan2>
-                    <img src="/images/icon_people.svg"></img>
+                    <img src="/images/icon_people_gray.svg"></img>
                     <p>{ votes || "14"}</p>
                 </Imgspan2>
                 <Imgspan2>

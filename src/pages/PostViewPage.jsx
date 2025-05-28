@@ -17,9 +17,17 @@ import { addComment } from '../services/comments';
 const MainDiv = styled.div`
   width: 393px;
   height: 852px;
-  padding: 40px 20px;
+  padding: 40px 0px;
   margin: 0 auto;
 `;
+
+const Wrap = styled.div`
+  padding: 0px 20px;
+`
+
+const ScrollContainer = styled.div`
+  overflow-y:auto;
+`
 
 const CommentUpload = styled.div`
   display: flex;
@@ -31,21 +39,27 @@ function PostViewPage() {
 
   return (
     <MainDiv>
+      <Wrap>
       <HeaderContainer type='pages' title='Community'></HeaderContainer>
       <Post></Post>
-      <VoteContainer></VoteContainer>
+      <VoteContainer type = '1'></VoteContainer>
 
       <Button type='long' title='Review Commit' to='/review'></Button>
 
       <Pick></Pick>
+      </Wrap>
 
-      <CommentItem></CommentItem>
-      <CommentItemlist postId={id}></CommentItemlist>
+      <ScrollContainer>
+              <CommentItemlist postId={id}></CommentItemlist>
+      </ScrollContainer>
 
+
+      <Wrap>
       <CommentUpload>
         <TextInput></TextInput>
         <Button type='short' title='Commit'></Button>
       </CommentUpload>
+      </Wrap>
     </MainDiv>
   );
 }

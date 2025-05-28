@@ -32,8 +32,18 @@ const IconBox = styled.div`
   display: flex;
   gap: 2px;
 
+  border: 1px solid #383838;
+  display: flex;
+  padding: 4px 10px;
+  align-items: center;
+  border-radius: 3px;
+
+  img{
+  width:10px; height:10px;
+  }
+
   p {
-    font-size: 10px;
+    font-size: 8px;
     color: var(--gray--font);
     font-weight: 700;
   }
