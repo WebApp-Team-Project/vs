@@ -10,7 +10,10 @@ const Container = styled.div`
   border: 0.7px solid #414141;
   border-radius: 8px;
   cursor: pointer;
+  overflow: hidden;
+`;
 
+const ContentContainer = styled.div`
   padding: 10px 20px;
   transition: all 0.3s ease;
 
@@ -80,6 +83,28 @@ const Imgspan2 = styled.span`
   }
 `;
 
+const GoToReviewContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 23px;
+  width: 100%;
+  height: 42px;
+  background-color: var(--dark--font);
+  gap: 13px;
+  cursor: pointer;
+
+  img {
+    width: 17px;
+    height: 17px;
+  }
+
+  span {
+    color: var(--main--color);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.75rem;
+  }
+`;
+
 function PostItem(props) {
   const navigate = useNavigate();
 
@@ -94,32 +119,42 @@ function PostItem(props) {
     voteCount,
     timelimit,
     commentsCount,
+    review,
     colorTheme,
   } = props;
 
   return (
     <Container onClick={handleClick}>
-      <Topdiv>
-        <h2 style={{ color: colorTheme.color }}>&lt;{category}&gt;</h2>
-        <Imgspan>
-          <img src='/images/icon_clock.png'></img>
-          <h3>{timelimit}</h3>
-        </Imgspan>
-      </Topdiv>
-      <Maindiv>
-        <h1>{title}</h1>
-        <p>{content}</p>
-      </Maindiv>
-      <Bottomdiv>
-        <Imgspan2>
-          <img src='/images/icon_people.svg'></img>
-          <p>{voteCount}</p>
-        </Imgspan2>
-        <Imgspan2>
-          <img src='/images/icon_comment.svg'></img>
-          <p>{commentsCount}</p>
-        </Imgspan2>
-      </Bottomdiv>
+      <ContentContainer>
+        <Topdiv>
+          <h2 style={{ color: colorTheme.color }}>&lt;{category}&gt;</h2>
+          <Imgspan>
+            <img src='/images/icon_clock.png'></img>
+            <h3>{timelimit}</h3>
+          </Imgspan>
+        </Topdiv>
+        <Maindiv>
+          <h1>{title}</h1>
+          <p>{content}</p>
+        </Maindiv>
+        <Bottomdiv>
+          <Imgspan2>
+            <img src='/images/icon_people.svg'></img>
+            <p>{voteCount}</p>
+          </Imgspan2>
+          <Imgspan2>
+            <img src='/images/icon_comment.svg'></img>
+            <p>{commentsCount}</p>
+          </Imgspan2>
+        </Bottomdiv>
+      </ContentContainer>
+
+      {review && (
+        <GoToReviewContainer>
+          <img src='/images/icon_arrow.svg'></img>
+          <span>작성자 후기보러가기</span>
+        </GoToReviewContainer>
+      )}
     </Container>
   );
 }

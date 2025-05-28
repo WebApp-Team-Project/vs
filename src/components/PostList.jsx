@@ -26,6 +26,7 @@ function PostList(props) {
           timelimit={getTimeLimitText(post.vote?.deadline)}
           commentsCount={post.commentsCount}
           colorTheme={colorThemes[post.category]}
+          review={post.review}
         />
       ))}
     </Container>
