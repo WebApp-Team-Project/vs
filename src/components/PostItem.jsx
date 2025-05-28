@@ -87,13 +87,20 @@ function PostItem(props) {
     navigate(`/post/${props.id}`);
   };
 
-  const { category, title, content, voteCount, timelimit, commentsCount } =
-    props;
+  const {
+    category,
+    title,
+    content,
+    voteCount,
+    timelimit,
+    commentsCount,
+    colorTheme,
+  } = props;
 
   return (
     <Container onClick={handleClick}>
       <Topdiv>
-        <h2>&lt;{category}&gt;</h2>
+        <h2 style={{ color: colorTheme.color }}>&lt;{category}&gt;</h2>
         <Imgspan>
           <img src='/images/icon_clock.png'></img>
           <h3>{timelimit}</h3>

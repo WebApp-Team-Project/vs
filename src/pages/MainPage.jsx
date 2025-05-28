@@ -77,7 +77,6 @@ const ToggleContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
 `;
 
 const ToggleWrapper = styled.div`
@@ -90,6 +89,7 @@ const ToggleWrapper = styled.div`
   border-radius: 50px;
   background-color: var(--gray500--color);
   padding: 0 8px;
+  cursor: pointer;
 
   span {
     font-size: 0.625rem;
@@ -191,7 +191,7 @@ function MainPage() {
           categories={CATEGORY_LIST}
           colorThemes={COLOR_THEME}
         />
-        <PostList posts={posts}></PostList>
+        <PostList posts={posts} colorThemes={COLOR_THEME}></PostList>
       </Wrap>
 
       {/* 글 작성 버튼 */}

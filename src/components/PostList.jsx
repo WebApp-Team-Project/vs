@@ -10,7 +10,9 @@ const Container = styled.div`
   gap: 16px;
 `;
 
-function PostList({ posts }) {
+function PostList(props) {
+  const { posts, colorThemes } = props;
+
   return (
     <Container>
       {posts.map(post => (
@@ -23,6 +25,7 @@ function PostList({ posts }) {
           voteCount={post.voteCount}
           timelimit={getTimeLimitText(post.vote?.deadline)}
           commentsCount={post.commentsCount}
+          colorTheme={colorThemes[post.category]}
         />
       ))}
     </Container>
