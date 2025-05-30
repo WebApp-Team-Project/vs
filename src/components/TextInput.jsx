@@ -65,6 +65,7 @@ const StyledInput = styled.input`
 `;
 
 const SelectTextArea = styled(StyledInput)`
+  width: 100%;
   height: 34px;
   background-color: #505050;
   border: 1px solid #6e6e6e;
@@ -100,7 +101,7 @@ const RemoveOptionBtn = styled.button`
 
 function TextInput(props) {
   // height: 높이, value & onChange: 제어 컴포넌트용
-  const { height, value, onChange, text, index, onSelectRemove, onKeyDown } =
+  const { height, value, onChange, text, index, onSelectRemove, onKeyPress } =
     props;
 
   const type = props.type || 'origin';
@@ -137,7 +138,7 @@ function TextInput(props) {
         placeholder={text || '입력하세요'}
         value={value}
         onChange={onChange}
-        onKeyDown={onKeyDown}
+        onKeyPress={e => onKeyPress(e)}
       ></StyledInput>
     );
   }

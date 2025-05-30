@@ -12,7 +12,11 @@ import Pick from '../components/Pick';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { useEffect, useRef, useState } from 'react';
-import { addComment, fetchComments } from '../services/comments';
+import {
+  addComment,
+  fetchCommentLikes,
+  fetchComments,
+} from '../services/comments';
 import { fetchPostDetailByPostId } from '../services/posts';
 import { getUidFromLocalStorage } from '../libs/user';
 import dayjs from 'dayjs';
@@ -58,35 +62,13 @@ function PostViewPage() {
 
   const myUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
 
-  // postId로 게시글 및 댓글 조회
-  useEffect(() => {
-    fetchPostDetailByPostId(id)
-      .then(result => {
-        setPost(result);
-        console.log('포스트', result);
-      })
-      .catch(error => {
-        console.error('게시글 조회 중 오류:', error);
-      });
-
-    // postId로 댓글 조회
-    fetchComments(id)
-      .then(result => {
-        setComments(result);
-        console.log('댓글', result);
-      })
-      .catch(error => {
-        console.error('댓글 조회 중 오류:', error);
-      });
-  }, [id]);
-
   // 댓글 작성 버튼 클릭 핸들러
   const handleCommitButtonClick = () => {
     addComment(id, commentInput, myUid)
       .then(() => {
         setCommentInput('');
         console.log('댓글 작성 성공');
-        onAfterAddComment();
+        onAfterAddOrLikeComment();
       })
       .catch(error => {
         console.error('댓글 작성 중 오류:', error);
@@ -119,19 +101,49 @@ function PostViewPage() {
   };
 
   // 댓글 작성 후 댓글 재조회
-  const onAfterAddComment = () => {
+  const onAfterAddOrLikeComment = isLike => {
     fetchComments(id)
       .then(res => {
         setComments(res);
-        setTimeout(() => {
-          commentListEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        if (!isLike) {
+          setTimeout(() => {
+            commentListEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
         console.log('댓글', res);
       })
       .catch(error => {
         console.error('댓글 조회 중 오류:', error);
       });
   };
+
+  // 마감일 지났는지 확인
+  function isDeadlinePassed(deadline) {
+    if (!deadline?.toDate) return false;
+    return dayjs(deadline.toDate()).isBefore(dayjs());
+  }
+
+  // postId로 게시글 및 댓글 조회
+  useEffect(() => {
+    fetchPostDetailByPostId(id)
+      .then(result => {
+        setPost(result);
+        console.log('포스트', result);
+      })
+      .catch(error => {
+        console.error('게시글 조회 중 오류:', error);
+      });
+
+    // postId로 댓글 조회
+    fetchComments(id)
+      .then(result => {
+        setComments(result);
+        console.log('댓글', result);
+      })
+      .catch(error => {
+        console.error('댓글 조회 중 오류:', error);
+      });
+  }, [id]);
 
   return (
     <MainDiv>
@@ -153,7 +165,7 @@ function PostViewPage() {
       />
 
       {/* 작성자일 경우 및 마감되었을때만 후기 달기 버튼 보임 */}
-      {post?.authorUid === myUid && post?.vote?.deadline < dayjs() && (
+      {post?.authorUid === myUid && isDeadlinePassed(post?.vote?.deadline) && (
         <div style={{ margin: '28px 0px', width: '100%' }}>
           <Button type='long' title='Review Commit' to='/review'></Button>
         </div>
@@ -163,7 +175,11 @@ function PostViewPage() {
       {post?.review && <Pick></Pick>}
 
       <CommentCount>Comment {comments.length}</CommentCount>
-      <CommentItemlist postId={id} comments={comments}></CommentItemlist>
+      <CommentItemlist
+        postId={id}
+        comments={comments}
+        onAfterAddOrLikeComment={onAfterAddOrLikeComment}
+      ></CommentItemlist>
       <div ref={commentListEndRef}></div>
 
       <CommentUpload>
@@ -172,7 +188,7 @@ function PostViewPage() {
           text='댓글을 작성해주세요!'
           value={commentInput}
           onChange={handleCommentInputChange}
-          onKeyDown={handleCommitButtonKeyDown}
+          onKeyPress={handleCommitButtonKeyDown}
         ></TextInput>
         <Button
           type='short'

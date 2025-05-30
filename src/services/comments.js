@@ -83,3 +83,13 @@ export const likeComment = async (postId, commentId, uid) => {
     return false;
   }
 };
+
+// 댓글 좋아요 조회 API
+export const fetchCommentLikes = async (postId, commentId) => {
+  const q = query(
+    collection(db, 'posts', postId, 'comments', commentId, 'likes'),
+  );
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
