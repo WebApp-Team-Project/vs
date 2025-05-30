@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import '../index.css';
+import { useEffect } from 'react';
 
 const PickDiv = styled.div`
   width: 353px;
@@ -24,13 +25,20 @@ const PickHeader = styled.div`
 `;
 
 const PickChip = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: auto;
   height: 18px;
   font-size: 8px;
-  background-color: var(--yellow--color);
-  // 선택한것에 따라 바뀌게게
   border-radius: 50px;
   padding: 2px 10px;
+  font-weight: bold;
+  background-color: ${({ $voteOptionIndex }) => {
+    if ($voteOptionIndex === 0) return 'var(--yellow--color)';
+    if ($voteOptionIndex === 1) return 'var(--green--color)';
+    if ($voteOptionIndex === 2) return 'var(--orange--color)';
+  }};
 `;
 
 const PickContent = styled.div`
@@ -46,13 +54,15 @@ const PickContent = styled.div`
 `;
 
 function Pick(props) {
+  const { voteOptionIndex, voteOption, content } = props;
+
   return (
     <PickDiv>
       <PickHeader>
         작성자의 Pick
-        <PickChip>선택지1</PickChip>
+        <PickChip $voteOptionIndex={voteOptionIndex}>{voteOption}</PickChip>
       </PickHeader>
-      <PickContent>작성자 후기</PickContent>
+      <PickContent>{content}</PickContent>
     </PickDiv>
   );
 }

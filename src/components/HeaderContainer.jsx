@@ -45,8 +45,8 @@ const HeaderIcon = styled.div`
 function HeaderContainer(props) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/`);
+  const handleGoBackButtonClick = () => {
+    navigate(-1);
   };
 
   const handleClick2 = () => {
@@ -75,7 +75,7 @@ function HeaderContainer(props) {
   } else if (type === 'pages') {
     return (
       <Header2>
-        <img onClick={handleClick} src='/images/icon_back.svg' />
+        <img onClick={handleGoBackButtonClick} src='/images/icon_back.svg' />
         <h1>{title || 'page'}</h1>
       </Header2>
     );

@@ -4,7 +4,12 @@ import TextInput from '../components/TextInput';
 import HeaderContainer from '../components/HeaderContainer';
 import '../index.css';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { fetchPostDetailByPostId } from '../services/posts';
+import { useDropzone } from 'react-dropzone';
+import { createReview } from '../services/reviews';
+import { getUidFromLocalStorage } from '../libs/user';
 // import { db } from '../libs/firebase';
 
 const MainDiv = styled.div`
@@ -42,7 +47,7 @@ const PickDiv = styled.div`
   font-weight: bold;
   color: #fff;
   padding: 8px 20px;
-  background-color:${props => {
+  background-color: ${props => {
     if (props.selected) {
       if (props.index === 0) return 'var(--yellow--color)';
       if (props.index === 1) return 'var(--green--color)';
@@ -53,22 +58,103 @@ const PickDiv = styled.div`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-`
+`;
+
+const DropZoneArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 139px;
+  border: 1px dashed #515151;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #202020;
+  overflow: hidden;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: var(--blue--color);
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+`;
 
 function ReviewPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
+  const [picks, setPicks] = useState([]);
   const [selectedPick, setSelectedPick] = useState(0);
-  
-  const picks = ['선택지1', '선택지2', '선택지3'];
-  // 나중에 선택지 값으로 대체
+  const [content, setContent] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
 
-  const handlePickSelect = (index) => {
+  // 선택지 선택 핸들러
+  const handlePickSelect = index => {
     setSelectedPick(index);
   };
 
+  // 후기 등록 버튼 클릭 핸들러
+  const handleUploadButtonClick = () => {
+    createReview(id, {
+      content,
+      authorUid: getUidFromLocalStorage(),
+      voteOption: selectedPick,
+      imageUrl: thumbnail,
+    })
+      .then(() => {
+        navigate(-1);
+      })
+      .catch(error => {
+        console.error('후기 등록 중 오류:', error);
+      });
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchPostDetailByPostId(id)
+        .then(result => {
+          setPicks(result.vote.options);
+        })
+        .catch(error => {
+          console.error('게시글 조회 중 오류:', error);
+        });
+    }
+  }, [id]);
+
+  // Dropzone 설정
+  const getBase64 = file =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+  const onDrop = useCallback(
+    async acceptedFiles => {
+      const file = acceptedFiles[0];
+      if (file) {
+        const base64 = await getBase64(file);
+        setThumbnail(base64);
+      }
+    },
+    [setThumbnail],
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { 'image/*': [] },
+    multiple: false,
+  });
+
   return (
     <MainDiv>
-        <HeaderContainer type="pages" title="Review"></HeaderContainer>
+      <HeaderContainer type='pages' title='Review'></HeaderContainer>
       <MainInner>
         <WriteDiv>
           <label htmlFor=''>나의 PICK</label>
@@ -86,16 +172,31 @@ function ReviewPage() {
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>내용</label>
-          <TextInput text='내용을 작성해주세요!' />
+          <TextInput
+            type='input'
+            text='내용을 작성해주세요!'
+            value={content}
+            onChange={e => setContent(e.target.value)}
+          />
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>이미지 첨부</label>
-          <input type="file" accept='image/*' />
+          <DropZoneArea {...getRootProps()}>
+            <input {...getInputProps()} />
+            {thumbnail ? (
+              <img src={thumbnail} />
+            ) : (
+              <img
+                style={{ width: '54px', height: '54px' }}
+                src='/images/icon_image.svg'
+              />
+            )}
+          </DropZoneArea>
         </WriteDiv>
       </MainInner>
 
       <ButtonDiv>
-        <Button type="long"/>
+        <Button type='long' onClick={handleUploadButtonClick} />
       </ButtonDiv>
     </MainDiv>
   );

@@ -31,7 +31,7 @@ function App() {
         <Route path='/write' element={<PostWritePage />} />
 
         {/* 후기 페이지 (ReviewPage) */}
-        <Route path='/review' element={<ReviewPage />} />
+        <Route path='/review/:id' element={<ReviewPage />} />
 
         {/* 프로필 페이지 (ProfilePage) */}
         <Route path='/profile' element={<ProfilePage />} />

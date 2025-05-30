@@ -138,7 +138,9 @@ function TextInput(props) {
         placeholder={text || '입력하세요'}
         value={value}
         onChange={onChange}
-        onKeyPress={e => onKeyPress(e)}
+        onKeyPress={e => {
+          if (onKeyPress) onKeyPress(e);
+        }}
       ></StyledInput>
     );
   }
