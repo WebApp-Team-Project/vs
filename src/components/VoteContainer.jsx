@@ -6,6 +6,8 @@ import dayjs from 'dayjs';
 import { getUidFromLocalStorage } from '../libs/user';
 import { submitVote } from '../services/votes';
 import { motion } from 'framer-motion';
+import { isDeadlinePassed } from '../libs/date';
+import { getHighestRateIndex } from '../libs/rate';
 
 const VOTE_OPTION_COLOR = [
   'var(--yellow--color)',
@@ -215,30 +217,37 @@ function VoteContainer(props) {
         <VoteOption
           key={`${option}-${index}`}
           onClick={() => {
-            if (!isAlreadyVoted) {
+            if (!isAlreadyVoted && !isDeadlinePassed(deadline)) {
               setVoteOptionIndex(index);
             }
           }}
           $selected={voteOptionIndex === index}
           $color={VOTE_OPTION_COLOR[index]}
-          $disabled={isAlreadyVoted}
+          $disabled={isAlreadyVoted || isDeadlinePassed(deadline)}
           $isAlreadyVoted={isAlreadyVoted}
+          $isDeadlinePassed={isDeadlinePassed(deadline)}
         >
           <div style={{ position: 'relative', zIndex: 1 }}>
-            {isAlreadyVoted && voteOptionIndex === index && (
-              <img src='/images/icon_check.svg' />
-            )}
+            {isAlreadyVoted &&
+              voteOptionIndex === index &&
+              !isDeadlinePassed(deadline) && (
+                <img src='/images/icon_check.svg' />
+              )}
+            {isDeadlinePassed(deadline) &&
+              getHighestRateIndex(voteStats) === index && (
+                <img src='/images/icon_crown.svg' />
+              )}
             <span>{option}</span>
           </div>
 
-          {isAlreadyVoted && (
+          {(isAlreadyVoted || isDeadlinePassed(deadline)) && (
             <div style={{ position: 'relative', zIndex: 1 }}>
               <p>{voteStats?.[index]?.rate}%</p>
               <p>{`(${voteStats?.[index]?.count}명)`}</p>
             </div>
           )}
 
-          {isAlreadyVoted && (
+          {(isAlreadyVoted || isDeadlinePassed(deadline)) && (
             <RateBar
               $color={VOTE_OPTION_COLOR[index]}
               animate={{ width: `${voteStats?.[index]?.rate || 0}%` }}
@@ -248,7 +257,7 @@ function VoteContainer(props) {
         </VoteOption>
       ))}
 
-      {!isAlreadyVoted && (
+      {!isAlreadyVoted && !isDeadlinePassed(deadline) && (
         <Button
           type='long'
           title='투표하기'

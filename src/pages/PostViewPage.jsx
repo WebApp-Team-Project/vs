@@ -20,6 +20,7 @@ import {
 import { fetchPostDetailByPostId } from '../services/posts';
 import { getUidFromLocalStorage } from '../libs/user';
 import dayjs from 'dayjs';
+import { isDeadlinePassed } from '../libs/date';
 
 const MainDiv = styled.div`
   position: relative;
@@ -116,12 +117,6 @@ function PostViewPage() {
         console.error('댓글 조회 중 오류:', error);
       });
   };
-
-  // 마감일 지났는지 확인
-  function isDeadlinePassed(deadline) {
-    if (!deadline?.toDate) return false;
-    return dayjs(deadline.toDate()).isBefore(dayjs());
-  }
 
   // postId로 게시글 및 댓글 조회
   useEffect(() => {
