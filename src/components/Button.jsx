@@ -16,8 +16,12 @@ const LongButton = styled.button`
   border: none;
   border-radius: 8px;
   padding: 12px 0px;
-
+  transition: all 0.3s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--blue--color);
+  }
 `;
 
 const ShortButton = styled(LongButton)`

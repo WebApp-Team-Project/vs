@@ -54,9 +54,23 @@ const SelectOption = styled.div`
   gap: 6px;
 `;
 const ImgDiv = styled.div`
-  margin-left: auto;
-  margin-right: auto;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    img {
+      opacity: 0.8;
+    }
+  }
 `;
 const ButtonDiv = styled.div`
   width: 353px;
@@ -106,10 +120,20 @@ function PostWritePage() {
   const writePost = async () => {
     const authorUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
 
-    if (!category || !title || !content) {
+    if (!category || !title || !content || !deadline || !options.length) {
       alert('내용을 모두 작성해주세요!');
       return;
     }
+
+    const DEADLINE_HOURS = {
+      '6시간': 6,
+      '12시간': 12,
+      '24시간': 24,
+      '3일': 72,
+    };
+
+    const hours = DEADLINE_HOURS[deadline];
+    const deadlineDate = new Date(Date.now() + hours * 60 * 60 * 1000);
 
     // 글 작성 API 호출
     createPost({
@@ -118,10 +142,9 @@ function PostWritePage() {
       title,
       content,
       options,
-      deadline: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000 * 12)),
+      deadline: Timestamp.fromDate(deadlineDate),
     })
       .then(() => {
-        alert('글이 등록되었습니다!');
         navigate('/');
       })
       .catch(e => {
@@ -141,10 +164,21 @@ function PostWritePage() {
         <SelectOption key={i}>
           <label htmlFor=''>{`{ 선택지 ${i} }`}</label>
           <TextInput
+            index={i}
             type='select'
+            text='20자 이내로 작성해주세요.'
             value={options[i - 1]}
             onChange={e =>
               setOptions(prev => [...prev.slice(0, i - 1), e.target.value])
+            }
+            // 3번째 선택지에만 삭제 이벤트 추가
+            onSelectRemove={
+              optionCount === 3 && i === 3
+                ? () => {
+                    setOptionCount(2);
+                    setOptions(prev => prev.slice(0, 2));
+                  }
+                : undefined
             }
           />
         </SelectOption>,
@@ -171,6 +205,7 @@ function PostWritePage() {
           <label htmlFor=''>제목</label>
           <TextInput
             text='제목을 작성해주세요!'
+            type='input'
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
@@ -179,6 +214,7 @@ function PostWritePage() {
           <label htmlFor=''>내용</label>
           <TextInput
             text='내용을 작성해주세요!'
+            type='input'
             value={content}
             onChange={e => setContent(e.target.value)}
           />

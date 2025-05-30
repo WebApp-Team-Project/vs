@@ -15,6 +15,7 @@ const MainDiv = styled.div`
   height: 100%;
   padding: 40px 20px;
   margin: 0 auto;
+  overflow-y: auto;
 `;
 
 const Wrap = styled.div`
