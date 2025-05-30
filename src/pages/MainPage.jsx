@@ -7,8 +7,7 @@ import PostList from '../components/PostList';
 import HeaderContainer from '../components/HeaderContainer';
 import Button from '../components/Button';
 
-import { createPost, fetchPostsByStatusAndCategory } from '../services/posts';
-import { Timestamp } from 'firebase/firestore';
+import { fetchPostsByStatusAndCategory } from '../services/posts';
 
 const MainDiv = styled.div`
   position: relative;

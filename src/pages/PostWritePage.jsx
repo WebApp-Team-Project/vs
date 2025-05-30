@@ -64,7 +64,34 @@ const ButtonDiv = styled.div`
   bottom: 40px;
 `;
 
-function PostWritePage(props) {
+const DeadLineItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  padding: 0 16px;
+  border-radius: 50px;
+  background-color: var(--gray800--color);
+  border: 1px solid
+    ${({ $active }) => ($active ? 'var(--light--font)' : 'var(--gray--font)')};
+  color: ${({ $active }) =>
+    $active ? 'var(--light--font)' : 'var(--gray--font)'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+`;
+
+const CATEGORY_LIST = ['학교', '연애', '음식', '일상'];
+
+const COLOR_THEME = {
+  학교: { color: 'var(--green--color)', border: 'var(--green--color)' },
+  연애: { color: 'var(--pink--color)', border: 'var(--pink--color)' },
+  음식: { color: 'var(--yellow--color)', border: 'var(--yellow--color)' },
+  일상: { color: '#8EE060', border: '#8EE060' },
+};
+
+const DEADLINE_LIST = ['6시간', '12시간', '24시간', '3일'];
+
+function PostWritePage() {
   const navigate = useNavigate();
 
   const [optionCount, setOptionCount] = useState(2);
@@ -72,7 +99,8 @@ function PostWritePage(props) {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [deadline, setDeadline] = useState(''); // 문자열로 입력받고 Timestamp로 변환
+  const [options, setOptions] = useState([]);
+  const [deadline, setDeadline] = useState('');
 
   // 업로드 버튼 클릭 핸들러
   const writePost = async () => {
@@ -86,10 +114,10 @@ function PostWritePage(props) {
     // 글 작성 API 호출
     createPost({
       authorUid,
-      category: '학교',
+      category,
       title,
       content,
-      options: ['함돈', '트랩'],
+      options,
       deadline: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000 * 12)),
     })
       .then(() => {
@@ -111,8 +139,14 @@ function PostWritePage(props) {
     for (let i = 1; i <= optionCount; i++) {
       options.push(
         <SelectOption key={i}>
-          <label htmlFor=''>선택지 {i}</label>
-          <TextInput type='select' />
+          <label htmlFor=''>{`{ 선택지 ${i} }`}</label>
+          <TextInput
+            type='select'
+            value={options[i - 1]}
+            onChange={e =>
+              setOptions(prev => [...prev.slice(0, i - 1), e.target.value])
+            }
+          />
         </SelectOption>,
       );
     }
@@ -127,16 +161,10 @@ function PostWritePage(props) {
         <WriteDiv>
           <label htmlFor=''>카테고리</label>
           <CategoryBox
-            categories={['<학교>', '<연애>', '<음식>', '<일상>']}
-            colorThemes={{
-              '<학교>': { color: '#51BAF3', border: '#51BAF3' },
-              '<연애>': { color: '#EB5DE9', border: '#EB5DE9' },
-              '<음식>': { color: '#EEBA4E', border: '#EEBA4E' },
-              '<일상>': { color: '#8EE060', border: '#8EE060' },
-            }}
-            onChange={category => {
-              setCategory(category.replace(/[<>]/g, ''));
-            }}
+            categories={CATEGORY_LIST}
+            colorThemes={COLOR_THEME}
+            setCategory={setCategory}
+            selectedCategory={category}
           />
         </WriteDiv>
         <WriteDiv>
@@ -171,7 +199,18 @@ function PostWritePage(props) {
         </WriteDiv>
         <WriteDiv>
           <label htmlFor=''>마감시간</label>
-          <TextInput text='마감시간을 작성해주세요!' />
+          {/* <TextInput text='마감시간을 작성해주세요!' /> */}
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            {DEADLINE_LIST.map((item, index) => (
+              <DeadLineItem
+                key={`${item}-${index}`}
+                $active={deadline === item}
+                onClick={() => setDeadline(item)}
+              >
+                {item}
+              </DeadLineItem>
+            ))}
+          </div>
         </WriteDiv>
       </MainInner>
 
