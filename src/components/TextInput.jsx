@@ -3,7 +3,7 @@ import '../index.css';
 
 const StyledTextArea = styled.textarea`
   background-color: #202020;
-  width: 353px;
+  flex: 1;
   height: ${props => props.height}px;
   display: block;
   border: 1px solid #515151;
@@ -36,7 +36,7 @@ const StyledInput = styled.input`
   display: flex;
   align-items: center;
   background-color: #202020;
-  width: 353px;
+  flex: 1;
   height: ${props => props.height}px;
   border: 1px solid #515151;
   border-radius: 6px;
@@ -65,7 +65,6 @@ const StyledInput = styled.input`
 `;
 
 const SelectTextArea = styled(StyledInput)`
-  width: 321px;
   height: 34px;
   background-color: #505050;
   border: 1px solid #6e6e6e;
@@ -101,7 +100,8 @@ const RemoveOptionBtn = styled.button`
 
 function TextInput(props) {
   // height: 높이, value & onChange: 제어 컴포넌트용
-  const { height, value, onChange, text, index, onSelectRemove } = props;
+  const { height, value, onChange, text, index, onSelectRemove, onKeyDown } =
+    props;
 
   const type = props.type || 'origin';
   if (type === 'origin') {
@@ -137,6 +137,7 @@ function TextInput(props) {
         placeholder={text || '입력하세요'}
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       ></StyledInput>
     );
   }

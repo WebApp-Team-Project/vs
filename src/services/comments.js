@@ -10,12 +10,18 @@ import {
   getDoc,
   setDoc,
   deleteDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 import { createNotification } from './notifications';
 
-// 댓글 리스트 조회 API
+// 댓글 리스트 오름차순 조회 API
 export const fetchComments = async postId => {
-  const snapshot = await getDocs(collection(db, 'posts', postId, 'comments'));
+  const q = query(
+    collection(db, 'posts', postId, 'comments'),
+    orderBy('createdAt', 'asc'),
+  );
+  const snapshot = await getDocs(q);
 
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };

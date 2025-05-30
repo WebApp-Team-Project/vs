@@ -46,6 +46,7 @@ const Wrap = styled.div`
   flex-direction: column;
   gap: 10px;
   color: var(--light--font);
+  font-weight: 'IBM Plex Sans', sans-serif;
 
   h1 {
     font-size: 16px;
@@ -55,6 +56,7 @@ const Wrap = styled.div`
   p {
     font-size: 14px;
     font-weight: 400;
+    color: #d9d9d9;
   }
 `;
 

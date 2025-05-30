@@ -32,6 +32,7 @@ const UserName = styled.h1`
 const IconBox = styled.div`
   display: flex;
   gap: 2px;
+  cursor: pointer;
 
   p {
     font-size: 10px;

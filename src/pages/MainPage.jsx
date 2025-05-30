@@ -15,7 +15,6 @@ const MainDiv = styled.div`
   height: 100%;
   padding: 40px 20px;
   margin: 0 auto;
-  overflow-y: auto;
 `;
 
 const Wrap = styled.div`
@@ -191,11 +190,7 @@ function MainPage() {
           categories={CATEGORY_LIST}
           colorThemes={COLOR_THEME}
         />
-        <PostList
-          posts={posts}
-          colorThemes={COLOR_THEME}
-          status={status}
-        ></PostList>
+        <PostList posts={posts} colorThemes={COLOR_THEME} status={status} />
       </Wrap>
 
       {/* 글 작성 버튼 */}

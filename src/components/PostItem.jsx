@@ -51,6 +51,10 @@ const Maindiv = styled.div`
   }
   p {
     font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
   }
 `;
 
