@@ -5,8 +5,19 @@ import PostViewPage from './pages/PostViewPage';
 import ReviewPage from './pages/ReviewPage';
 import ProfilePage from './pages/ProfilePage';
 import NotificationPage from './pages/NotificationPage';
+import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { setUidToLocalStorage } from './libs/user';
 
 function App() {
+  useEffect(() => {
+    const uid = localStorage.getItem('uid');
+    if (!uid) {
+      const newUid = uuidv4();
+      setUidToLocalStorage(newUid);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -20,7 +31,7 @@ function App() {
         <Route path='/write' element={<PostWritePage />} />
 
         {/* 후기 페이지 (ReviewPage) */}
-        <Route path='/review' element={<ReviewPage />} />
+        <Route path='/review/:id' element={<ReviewPage />} />
 
         {/* 프로필 페이지 (ProfilePage) */}
         <Route path='/profile' element={<ProfilePage />} />

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import '../index.css';
+import dayjs from 'dayjs';
+import { fetchComments, likeComment } from '../services/comments';
+import { getUidFromLocalStorage } from '../libs/user';
 
 const CommentItemContainer = styled.div`
   width: 100%;
@@ -14,7 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 3px;
 
-  div {
+  > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,14 +28,27 @@ const Container = styled.div`
 const UserName = styled.h1`
   font-size: 11px;
   font-weight: 700;
-  color: ${props => props.voteOptionId || '#FFFFFF'}
+  color: ${props => props.voteOptionId || '#FFFFFF'};
 `;
 
 const IconBox = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 18px;
+  border: 1px solid #383838;
+  border-radius: 3px;
   gap: 2px;
+  cursor: pointer;
+
+  img {
+    width: 10px;
+    height: 10px;
+  }
 
   p {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 10px;
     color: var(--gray--font);
     font-weight: 700;
@@ -42,7 +58,7 @@ const IconBox = styled.div`
 const Content = styled.p`
   font-size: 11px;
   color: var(--light--font);
-  font-family: "IBM Plex Sans";
+  font-family: 'IBM Plex Sans';
   font-weight: 400;
 `;
 
@@ -53,21 +69,60 @@ const TimeStamp = styled.p`
 `;
 
 function CommentItem(props) {
-  const { userId, content, timestamp, likes, voteOptionId } = props;
+  const {
+    id,
+    postId,
+    userId,
+    content,
+    timestamp,
+    likes,
+    voteOptionId,
+    index,
+    onAfterAddOrLikeComment,
+  } = props;
+
+  // timestamp를 Date 객체로 변환
+  const date = timestamp?.toDate
+    ? timestamp.toDate()
+    : timestamp
+      ? new Date(timestamp)
+      : null;
+  const dateStr = date ? dayjs(date).format('MM/DD') : ''; // 날짜
+  const timeStr = date ? dayjs(date).format('HH:mm') : ''; // 시간
+
+  // 좋아요 클릭 핸들러
+  const handleLikeButtonClick = () => {
+    const myUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
+
+    likeComment(postId, id, myUid)
+      .then(res => {
+        if (res) {
+          console.log('좋아요 성공');
+          onAfterAddOrLikeComment(true);
+        } else {
+          console.log('이미 좋아요를 눌렀습니다.');
+        }
+      })
+      .catch(error => {
+        console.error('좋아요 실패:', error);
+      });
+  };
 
   return (
     <CommentItemContainer>
       <Container>
         <div>
-          <UserName>&lt;{userId || '익명1'}&gt;</UserName>
-          <IconBox>
-            <img src='/images/icon_like.svg'/>
+          <UserName>{`{ 익명${index + 1} }`}</UserName>
+          <IconBox onClick={handleLikeButtonClick}>
+            <img src='/images/icon_like.svg' />
             <p>{likes || '0'}</p>
           </IconBox>
         </div>
         <Content>{content || '댓글 내용입니다.'}</Content>
         <div>
-          <TimeStamp>{timestamp || '5/23 17:54'}</TimeStamp>
+          <TimeStamp>
+            {dateStr} {timeStr}
+          </TimeStamp>
         </div>
       </Container>
     </CommentItemContainer>

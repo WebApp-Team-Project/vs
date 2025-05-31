@@ -10,12 +10,18 @@ import {
   getDoc,
   setDoc,
   deleteDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 import { createNotification } from './notifications';
 
-// 댓글 리스트 조회 API
+// 댓글 리스트 오름차순 조회 API
 export const fetchComments = async postId => {
-  const snapshot = await getDocs(collection(db, 'posts', postId, 'comments'));
+  const q = query(
+    collection(db, 'posts', postId, 'comments'),
+    orderBy('createdAt', 'asc'),
+  );
+  const snapshot = await getDocs(q);
 
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
@@ -45,8 +51,6 @@ export const addComment = async (postId, content, uid) => {
       message: `익명 님이 댓글을 작성했습니다.`,
     });
   }
-
-  return true;
 };
 
 // 댓글 삭제 API (필요시)
@@ -78,4 +82,14 @@ export const likeComment = async (postId, commentId, uid) => {
     // 이미 누른 경우
     return false;
   }
+};
+
+// 댓글 좋아요 조회 API
+export const fetchCommentLikes = async (postId, commentId) => {
+  const q = query(
+    collection(db, 'posts', postId, 'comments', commentId, 'likes'),
+  );
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };

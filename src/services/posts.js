@@ -32,7 +32,7 @@ export const fetchPostsByStatusAndCategory = async ({ status, category }) => {
   }
 
   // 오름차순 정렬
-  q = query(q, orderBy('vote.deadline', 'desc'), limit(30));
+  q = query(q, orderBy('createdAt', 'desc'));
 
   const snapshot = await getDocs(q); // 조회 결과
 
@@ -49,9 +49,11 @@ export const fetchPostsByStatusAndCategory = async ({ status, category }) => {
 };
 
 // 글 상세 조회 API
-export const fetchPostDetailByPostId = async (postId) => {
+export const fetchPostDetailByPostId = async postId => {
   const docSnap = await getDoc(doc(db, 'posts', postId));
-  const response = docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } : null;
+  const response = docSnap.exists()
+    ? { id: docSnap.id, ...docSnap.data() }
+    : null;
 
   return response;
 };
@@ -65,21 +67,21 @@ export const createPost = async ({
   options,
   deadline,
 }) => {
-    const response = await addDoc(collection(db, 'posts'), {
+  const response = await addDoc(collection(db, 'posts'), {
+    authorUid,
+    category,
+    title,
+    content,
+    createdAt: serverTimestamp(),
+    vote: {
       authorUid,
-      category,
-      title,
-      content,
-      createdAt: serverTimestamp(),
-      vote: {
-        authorUid, 
-        options, // ["함돈", "트랩", ...]
-        deadline, // Timestamp
-        participants: {}, // uid: optionIndex
-      },
-      review: null,
-      commentsCount: 0,
-    });
+      options, // ["함돈", "트랩", ...]
+      deadline, // Timestamp
+      participants: {}, // uid: optionIndex
+    },
+    review: null,
+    commentsCount: 0,
+  });
 
-    return response;
+  return response;
 };
