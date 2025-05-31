@@ -120,7 +120,14 @@ function PostWritePage() {
   const writePost = async () => {
     const authorUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
 
-    if (!category || !title || !content || !deadline || !options.length) {
+    if (
+      !category ||
+      !title ||
+      !content ||
+      !deadline ||
+      options.length < 2 ||
+      options.some(option => !option)
+    ) {
       alert('내용을 모두 작성해주세요!');
       return;
     }
@@ -167,6 +174,7 @@ function PostWritePage() {
             index={i}
             type='select'
             text='20자 이내로 작성해주세요.'
+            maxLength={20}
             value={options[i - 1]}
             onChange={e =>
               setOptions(prev => [...prev.slice(0, i - 1), e.target.value])

@@ -101,8 +101,16 @@ const RemoveOptionBtn = styled.button`
 
 function TextInput(props) {
   // height: 높이, value & onChange: 제어 컴포넌트용
-  const { height, value, onChange, text, index, onSelectRemove, onKeyPress } =
-    props;
+  const {
+    height,
+    value,
+    onChange,
+    text,
+    index,
+    onSelectRemove,
+    onKeyPress,
+    maxLength,
+  } = props;
 
   const type = props.type || 'origin';
   if (type === 'origin') {
@@ -121,6 +129,7 @@ function TextInput(props) {
           placeholder={text || ' '}
           value={value}
           onChange={onChange}
+          maxLength={maxLength}
         ></SelectTextArea>
 
         {/* 3번째 선택지만 버튼이 보임 */}

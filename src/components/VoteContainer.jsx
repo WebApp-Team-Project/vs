@@ -146,6 +146,11 @@ function VoteContainer(props) {
   const handleSubmitButtonClick = () => {
     const myUid = getUidFromLocalStorage(); // 로컬스토리지에서 uid 가져오기
 
+    if (voteOptionIndex === undefined || voteOptionIndex === null) {
+      alert('투표를 선택해주세요!');
+      return;
+    }
+
     submitVote(postId, voteOptionIndex, myUid)
       .then(() => {
         console.log('투표 성공');
