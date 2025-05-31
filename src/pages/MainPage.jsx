@@ -12,7 +12,7 @@ import { fetchPostsByStatusAndCategory } from '../services/posts';
 const MainDiv = styled.div`
   position: relative;
   width: 393px;
-  height: 100%;
+  height: fit-content;
   padding: 40px 20px;
   margin: 0 auto;
 `;
@@ -124,6 +124,17 @@ const ToggleChip = styled.div`
   left: ${({ $status }) => ($status === 'open' ? '0' : 'calc(100% - 35px)')};
 `;
 
+const IconButtonWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  width: 393px;
+  height: 52px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
 const CATEGORY_LIST = ['전체', '학교', '연애', '음식', '일상'];
 
 const COLOR_THEME = {
@@ -194,7 +205,9 @@ function MainPage() {
       </Wrap>
 
       {/* 글 작성 버튼 */}
-      <Button type='icon' to='/write' />
+      <IconButtonWrapper>
+        <Button type='icon' to='/write' />
+      </IconButtonWrapper>
     </MainDiv>
   );
 }

@@ -12,23 +12,17 @@ import Pick from '../components/Pick';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { useEffect, useRef, useState } from 'react';
-import {
-  addComment,
-  fetchCommentLikes,
-  fetchComments,
-} from '../services/comments';
+import { addComment, fetchComments } from '../services/comments';
 import { fetchPostDetailByPostId } from '../services/posts';
 import { getUidFromLocalStorage } from '../libs/user';
-import dayjs from 'dayjs';
 import { isDeadlinePassed } from '../libs/date';
 
 const MainDiv = styled.div`
   position: relative;
   width: 393px;
-  height: calc(100vh - 72px);
-  padding: 40px 20px 0 20px;
+  height: fit-content;
+  padding: 40px 20px 72px 20px;
   margin: 0 auto;
-  overflow-y: scroll;
 `;
 
 const CommentCount = styled.div`
@@ -44,11 +38,14 @@ const CommentCount = styled.div`
 
 const CommentUpload = styled.div`
   position: fixed;
+  left: 50%;
   bottom: 0;
+  transform: translateX(-50%);
   display: flex;
   width: 353px;
   height: 72px;
   gap: 6px;
+  background-color: #181818;
 `;
 
 function PostViewPage() {

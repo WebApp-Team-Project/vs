@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import HeaderContainer from '../components/HeaderContainer';
+import NotificationList from '../components/NotificationList';
 
 const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 393px;
-  height: 852px;
+  min-height: 100vh;
+  height: fit-content;
   padding: 40px 20px;
   margin: 0 auto;
 `;
@@ -10,7 +15,8 @@ const MainDiv = styled.div`
 function NotificationPage() {
   return (
     <MainDiv>
-      <h1 style={{ color: '#fff' }}>Notification 페이지</h1>
+      <HeaderContainer type='pages' title='Notifications' />
+      <NotificationList />
     </MainDiv>
   );
 }
