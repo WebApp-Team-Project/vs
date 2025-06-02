@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import HeaderContainer from '../components/HeaderContainer';
 
 const MainDiv = styled.div`
   width: 393px;
@@ -7,10 +8,17 @@ const MainDiv = styled.div`
   margin: 0 auto;
 `;
 
+const MockImg = styled.img`
+  width: 100%;
+  height: auto;
+  margin-top: 38px;
+`;
+
 function ProfilePage() {
   return (
     <MainDiv>
-      <h1 style={{ color: '#fff' }}>Profile 페이지</h1>
+      <HeaderContainer type='pages' title='Profile' />
+      <MockImg src='/images/profile_mock.png' />
     </MainDiv>
   );
 }
