@@ -42,19 +42,32 @@ const PickChip = styled.div`
 `;
 
 const PickContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 353px;
   height: auto;
   background-color: #242424;
   border: 1px solid #575757;
   border-radius: 6px;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: nomal;
+  padding: 16px 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: normal;
+    color: #fff;
+  }
 `;
 
 function Pick(props) {
-  const { voteOptionIndex, voteOption, content } = props;
+  const { voteOptionIndex, voteOption, content, imageUrl } = props;
 
   return (
     <PickDiv>
@@ -62,7 +75,10 @@ function Pick(props) {
         작성자의 Pick
         <PickChip $voteOptionIndex={voteOptionIndex}>{voteOption}</PickChip>
       </PickHeader>
-      <PickContent>{content}</PickContent>
+      <PickContent>
+        <img src={imageUrl} alt='review thumbnail' />
+        <p>{content}</p>
+      </PickContent>
     </PickDiv>
   );
 }

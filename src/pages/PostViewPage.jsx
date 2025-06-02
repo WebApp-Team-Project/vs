@@ -157,15 +157,17 @@ function PostViewPage() {
       />
 
       {/* 작성자일 경우 및 마감되었을때만 후기 달기 버튼 보임 */}
-      {post?.authorUid === myUid && isDeadlinePassed(post?.vote?.deadline) && (
-        <div style={{ margin: '28px 0px', width: '100%' }}>
-          <Button
-            type='long'
-            title='Review Commit'
-            to={`/review/${post?.id}`}
-          ></Button>
-        </div>
-      )}
+      {post?.authorUid === myUid &&
+        isDeadlinePassed(post?.vote?.deadline) &&
+        !post?.review && (
+          <div style={{ margin: '28px 0px', width: '100%' }}>
+            <Button
+              type='long'
+              title='Review Commit'
+              to={`/review/${post?.id}`}
+            ></Button>
+          </div>
+        )}
 
       {/* 후기 보여주기 */}
       {post?.review && (
@@ -173,6 +175,7 @@ function PostViewPage() {
           voteOption={post?.vote?.options[post?.review?.voteOption]}
           voteOptionIndex={post?.review?.voteOption}
           content={post?.review?.content}
+          imageUrl={post?.review?.imageUrl}
         />
       )}
 
