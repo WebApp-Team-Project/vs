@@ -32,7 +32,11 @@ export const fetchPostsByStatusAndCategory = async ({ status, category }) => {
   }
 
   // 오름차순 정렬
-  q = query(q, orderBy('createdAt', 'desc'));
+  if (status === 'open') {
+    q = query(q, orderBy('createdAt', 'desc'));
+  } else {
+    q = query(q, orderBy('vote.deadline', 'desc'));
+  }
 
   const snapshot = await getDocs(q); // 조회 결과
 
