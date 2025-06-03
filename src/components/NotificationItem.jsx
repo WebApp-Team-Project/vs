@@ -18,11 +18,6 @@ const NotificationTitle = styled.h2`
   color: var(--light--font);
   line-height: 1.25rem;
   font-weight: 400;
-
-
-  span {
-    font-weight: bold;
-  }
 `;
 
 const MessageandTimeContainer = styled.div`
@@ -33,20 +28,27 @@ const MessageandTimeContainer = styled.div`
   font-size: 0.75rem;
   width: 100%;
 
-  > h3{
+  > h3 {
     font-size: 10px;
     font-weight: 400;
   }
 `;
 
-function NotificationItem() {
+function NotificationItem(props) {
+  const { status, message } = props;
+
   return (
     <Container>
       <NotificationTitle>
-        <span>익명 </span>님이 대댓글을 작성했습니다.
+        {status === 'reply' && (
+          <span>
+            <b>익명 </b>님이 대댓글을 작성했습니다.
+          </span>
+        )}
+        {status === 'vote' && <span>내 투표 게시글이 마감되었습니다.</span>}
       </NotificationTitle>
       <MessageandTimeContainer>
-        <p>근데 트랩이 더 나을걸 요즘은</p>
+        <p>{message}</p>
         <h3>14:02</h3>
       </MessageandTimeContainer>
     </Container>
