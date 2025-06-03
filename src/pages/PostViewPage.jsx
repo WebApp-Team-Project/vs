@@ -31,7 +31,7 @@ const CommentCount = styled.div`
   font-family: 'IBM Plex Sans', sans-serif;
   color: #7d7d7d;
   padding-bottom: 10px;
-  padding-left: 30px;
+  padding-left: 20px;
   padding-top: 34px;
   border-bottom: 1px solid var(--gray200--color);
 `;

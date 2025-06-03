@@ -7,7 +7,7 @@ import { getUidFromLocalStorage } from '../libs/user';
 
 const CommentItemContainer = styled.div`
   width: 100%;
-  padding: 12px 30px;
+  padding: 10px 20px;
 
   border-bottom: 0.5px solid #505050;
 `;
@@ -63,7 +63,7 @@ const Content = styled.p`
 `;
 
 const TimeStamp = styled.p`
-  font-size: 6px;
+  font-size: 8px;
   font-weight: 400;
   color: var(--gray--font);
 `;

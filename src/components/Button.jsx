@@ -26,9 +26,9 @@ const LongButton = styled.button`
 
 const ShortButton = styled(LongButton)`
   display: flex;
-  width: 64px;
+  width: 40px;
   height: 32px;
-  padding: 12px 20px;
+  padding: 12px 12px;
   justify-content: center;
   align-items: center;
   font-size: 12px;
@@ -70,7 +70,7 @@ function Button(props) {
     );
   } else if (type === 'short') {
     return (
-      <ShortButton onClick={handleClick}>{props.title || 'Upload'}</ShortButton>
+      <ShortButton onClick={handleClick}><img src="/images/comment_send.png" alt="" width="16px"/></ShortButton>
     );
   } else if (type === 'write') {
     return (
