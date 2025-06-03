@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
 import '../index.css';
 import dayjs from 'dayjs';
-import { fetchComments, likeComment } from '../services/comments';
+import { fetchCommentLikes, likeComment } from '../services/comments';
 import { getUidFromLocalStorage } from '../libs/user';
+import { useEffect, useState } from 'react';
 
 const CommentItemContainer = styled.div`
   width: 100%;
@@ -28,7 +28,7 @@ const Container = styled.div`
 const UserName = styled.h1`
   font-size: 11px;
   font-weight: 700;
-  color: ${props => props.voteOptionId || '#FFFFFF'};
+  color: ${({ $voteOptionColor }) => $voteOptionColor};
 `;
 
 const IconBox = styled.div`
@@ -50,7 +50,8 @@ const IconBox = styled.div`
   p {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 10px;
-    color: var(--gray--font);
+    color: ${({ $isLiked }) =>
+      $isLiked ? 'var(--main--color)' : 'var(--gray--font)'};
     font-weight: 700;
   }
 `;
@@ -76,10 +77,13 @@ function CommentItem(props) {
     content,
     timestamp,
     likes,
-    voteOptionId,
     index,
     onAfterAddOrLikeComment,
+    voteParticipants,
   } = props;
+
+  const [voteOptionColor, setVoteOptionColor] = useState('#FFFFFF');
+  const [isLiked, setIsLiked] = useState(false);
 
   // timestamp를 Date 객체로 변환
   const date = timestamp?.toDate
@@ -108,13 +112,52 @@ function CommentItem(props) {
       });
   };
 
+  useEffect(() => {
+    if (!userId) return;
+
+    let voteOptionColor = '#FFFFFF';
+
+    if (voteParticipants?.[userId] === 0) {
+      voteOptionColor = '#8ee060';
+    } else if (voteParticipants?.[userId] === 1) {
+      voteOptionColor = '#eeba4e';
+    } else if (voteParticipants?.[userId] === 2) {
+      voteOptionColor = '#f37b4a';
+    }
+
+    setVoteOptionColor(voteOptionColor);
+  }, [voteParticipants, userId]);
+
+  useEffect(() => {
+    const myUid = getUidFromLocalStorage();
+
+    // 댓글 좋아요 조회 API 호출
+    fetchCommentLikes(postId, id)
+      .then(res => {
+        console.log('댓글 좋아요', res);
+
+        // 좋아요 여부 확인
+        const isLiked = res.find(like => like.id === myUid) !== undefined;
+        setIsLiked(isLiked);
+      })
+      .catch(error => {
+        console.error('댓글 좋아요 조회 중 오류:', error);
+      });
+  }, [postId, id, likes]);
+
   return (
     <CommentItemContainer>
       <Container>
         <div>
-          <UserName>{`{ 익명${index + 1} }`}</UserName>
-          <IconBox onClick={handleLikeButtonClick}>
-            <img src='/images/icon_like.svg' />
+          <UserName
+            $voteOptionColor={voteOptionColor}
+          >{`{ 익명${index + 1} }`}</UserName>
+          <IconBox onClick={handleLikeButtonClick} $isLiked={isLiked}>
+            {isLiked ? (
+              <img src='/images/icon_like_blue.svg' />
+            ) : (
+              <img src='/images/icon_like.svg' />
+            )}
             <p>{likes || '0'}</p>
           </IconBox>
         </div>

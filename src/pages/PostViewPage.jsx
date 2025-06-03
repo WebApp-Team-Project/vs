@@ -183,6 +183,7 @@ function PostViewPage() {
       <CommentItemlist
         postId={id}
         comments={comments}
+        voteParticipants={post?.vote?.participants}
         onAfterAddOrLikeComment={onAfterAddOrLikeComment}
       ></CommentItemlist>
       <div ref={commentListEndRef}></div>

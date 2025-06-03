@@ -2,7 +2,7 @@ import '../index.css';
 import CommentItem from './CommentItem';
 
 function CommentItemlist(props) {
-  const { postId, comments, onAfterAddOrLikeComment } = props;
+  const { postId, comments, onAfterAddOrLikeComment, voteParticipants } = props;
 
   return (
     <>
@@ -18,6 +18,7 @@ function CommentItemlist(props) {
           likes={comment.likes}
           onAfterAddOrLikeComment={onAfterAddOrLikeComment}
           voteOptionId={comment.voteOptionId}
+          voteParticipants={voteParticipants}
         />
       ))}
     </>
