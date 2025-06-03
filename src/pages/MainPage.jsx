@@ -142,7 +142,7 @@ const COLOR_THEME = {
   학교: { color: 'var(--green--color)', border: 'var(--green--color)' },
   연애: { color: 'var(--pink--color)', border: 'var(--pink--color)' },
   음식: { color: 'var(--yellow--color)', border: 'var(--yellow--color)' },
-  일상: { color: '#8EE060', border: '#8EE060' },
+  일상: { color: 'var(--orange--color)', border: 'var(--orange--color)' },
 };
 
 function MainPage() {

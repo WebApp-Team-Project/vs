@@ -239,7 +239,8 @@ function VoteContainer(props) {
                 <img src='/images/icon_check.svg' />
               )}
             {isDeadlinePassed(deadline) &&
-              getHighestRateIndex(voteStats) === index && (
+              getHighestRateIndex(voteStats) === index &&
+              getHighestRateIndex(voteStats) > 0 && (
                 <img src='/images/icon_crown.svg' />
               )}
             <span>{option}</span>
