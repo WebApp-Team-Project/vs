@@ -75,7 +75,7 @@ function HeaderContainer(props) {
   } else if (type === 'pages') {
     return (
       <Header2>
-        <img onClick={handleGoBackButtonClick} src='/images/icon_back.svg' />
+        <img onClick={handleGoBackButtonClick} src='/images/icon_back.png' />
         <h1>{title || 'page'}</h1>
       </Header2>
     );

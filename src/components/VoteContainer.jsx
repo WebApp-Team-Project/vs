@@ -120,7 +120,7 @@ const Imgspan2 = styled.span`
   h3 {
     color: var(--gray2, #7d7d7d);
     font-family: 'IBM Plex Sans';
-    font-size: 6.4px;
+    font-size: 9px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -275,7 +275,7 @@ function VoteContainer(props) {
       )}
 
       <Imgspan2>
-        <img src='/images/icon_people.svg' />
+        <img src='/images/icon_people_black.png' width="12px" height="12px"/>
         <h3>{Object.keys(participants || {}).length.toLocaleString()}</h3>
       </Imgspan2>
     </Container>

@@ -79,11 +79,13 @@ const Imgspan = styled.span`
 const Imgspan2 = styled.span`
   display: flex;
   color: var(--gray--font);
-  gap: 1px;
+  gap: 2px;
+  text-align: center;
+  align-items: center;
 
   p {
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.5rem;
+    font-size: 10px;
     font-weight: 700;
   }
 `;
@@ -135,7 +137,7 @@ function PostItem(props) {
         <Topdiv>
           <h2 style={{ color: colorTheme.color }}>&lt;{category}&gt;</h2>
           <Imgspan $status={$status}>
-            <img src='/images/icon_clock.png'></img>
+            <img src='/images/icon_clock_black.png' width="16px" height="16px"></img>
             <h3>{timelimit}</h3>
           </Imgspan>
         </Topdiv>
@@ -145,7 +147,7 @@ function PostItem(props) {
         </Maindiv>
         <Bottomdiv>
           <Imgspan2>
-            <img src='/images/icon_people.svg'></img>
+            <img src='/images/icon_people_black.png' width="14px" height="14px"></img>
             <p>{voteCount}</p>
           </Imgspan2>
           <Imgspan2>

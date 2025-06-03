@@ -8,9 +8,19 @@ const Container = styled.div`
   margin-top: 10px;
 `;
 
+const LineDiv = styled.div`
+  width: 353px;
+  height: 10px;
+  background-color: #2a2a2a;
+  margin-top: 6px;
+`
+
+
 function NotificationList() {
   return (
     <Container>
+      <LineDiv></LineDiv>
+
       <NotificationItem />
       <NotificationItem />
       <NotificationItem />
