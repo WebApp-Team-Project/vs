@@ -7,7 +7,7 @@ import '../index.css';
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const Header2 = styled(Header)`
@@ -29,6 +29,14 @@ const Header2 = styled(Header)`
 
   img {
     cursor: pointer;
+  }
+`;
+
+const LogoContainer = styled.div`
+  cursor: pointer;
+
+  img {
+    width: 40.26px;
   }
 `;
 
@@ -62,9 +70,9 @@ function HeaderContainer(props) {
   if (type === 'default') {
     return (
       <Header>
-        <div>
-          <img />
-        </div>
+        <LogoContainer onClick={() => navigate('/')}>
+          <img src='/images/icon_logo.svg' />
+        </LogoContainer>
         <HeaderIcon>
           <img src='/images/icon_search.svg' />
           <img onClick={handleClick2} src='/images/icon_alert.svg' />

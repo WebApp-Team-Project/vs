@@ -45,6 +45,7 @@ const IconBox = styled.div`
   img {
     width: 10px;
     height: 10px;
+    transition: transform 0.3s ease;
   }
 
   p {
@@ -53,6 +54,7 @@ const IconBox = styled.div`
     color: ${({ $isLiked }) =>
       $isLiked ? 'var(--main--color)' : 'var(--gray--font)'};
     font-weight: 700;
+    transition: color 0.3s ease;
   }
 `;
 
@@ -118,9 +120,9 @@ function CommentItem(props) {
     let voteOptionColor = '#FFFFFF';
 
     if (voteParticipants?.[userId] === 0) {
-      voteOptionColor = '#8ee060';
-    } else if (voteParticipants?.[userId] === 1) {
       voteOptionColor = '#eeba4e';
+    } else if (voteParticipants?.[userId] === 1) {
+      voteOptionColor = '#6dc53c';
     } else if (voteParticipants?.[userId] === 2) {
       voteOptionColor = '#f37b4a';
     }

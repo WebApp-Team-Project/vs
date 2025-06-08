@@ -15,7 +15,7 @@ const StyledTextArea = styled.textarea`
   transition: all 0.2s ease;
 
   resize: none;
-  overflow: hidden;
+  overflow-y: auto;
 
   &::placeholder {
     color: #525252;

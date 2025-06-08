@@ -7,12 +7,14 @@ import ProfilePage from './pages/ProfilePage';
 import NotificationPage from './pages/NotificationPage';
 import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { setUidToLocalStorage } from './libs/user';
+import { getUidFromLocalStorage, setUidToLocalStorage } from './libs/user';
 
 function App() {
   useEffect(() => {
-    const uid = localStorage.getItem('uid');
-    if (!uid) {
+    const myUid = getUidFromLocalStorage();
+
+    // 로컬스토리지에 uid가 없으면 생성
+    if (!myUid) {
       const newUid = uuidv4();
       setUidToLocalStorage(newUid);
     }

@@ -20,6 +20,7 @@ import { isDeadlinePassed } from '../libs/date';
 const MainDiv = styled.div`
   position: relative;
   width: 393px;
+  min-height: 100vh;
   height: fit-content;
   padding: 40px 20px 72px 20px;
   margin: 0 auto;

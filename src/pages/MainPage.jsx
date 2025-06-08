@@ -169,7 +169,9 @@ function MainPage() {
     <MainDiv>
       <HeaderContainer></HeaderContainer>
       <Wrap>
-        <h1 className='h1_title'>Today_issue</h1>
+        <h1 className='h1_title' style={{ marginTop: '40.5px' }}>
+          Today_issue
+        </h1>
         <TodayIssueBoxWrap>
           <TodayIssueBox>
             <span>6시간 공강</span>

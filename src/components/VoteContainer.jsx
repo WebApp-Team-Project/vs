@@ -239,8 +239,7 @@ function VoteContainer(props) {
                 <img src='/images/icon_check.svg' />
               )}
             {isDeadlinePassed(deadline) &&
-              getHighestRateIndex(voteStats) === index &&
-              getHighestRateIndex(voteStats) > 0 && (
+              getHighestRateIndex(voteStats) === index && (
                 <img src='/images/icon_crown.svg' />
               )}
             <span>{option}</span>
@@ -266,7 +265,7 @@ function VoteContainer(props) {
       {!isAlreadyVoted && !isDeadlinePassed(deadline) && (
         <Button
           type='long'
-          title='투표하기'
+          title='submit'
           onClick={() => {
             if (!isAlreadyVoted) {
               handleSubmitButtonClick();
@@ -276,7 +275,7 @@ function VoteContainer(props) {
       )}
 
       <Imgspan2>
-        <img src='/images/icon_people_black.png' width="12px" height="12px"/>
+        <img src='/images/icon_people_black.png' width='12px' height='12px' />
         <h3>{Object.keys(participants || {}).length.toLocaleString()}</h3>
       </Imgspan2>
     </Container>

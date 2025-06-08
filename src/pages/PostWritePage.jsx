@@ -14,7 +14,8 @@ import { getUidFromLocalStorage } from '../libs/user';
 
 const MainDiv = styled.div`
   width: 393px;
-  height: 852px;
+  min-height: 100vh;
+  height: fit-content;
   padding: 40px 20px;
   margin: 0 auto;
 
@@ -74,7 +75,7 @@ const ImgDiv = styled.div`
 `;
 const ButtonDiv = styled.div`
   width: 353px;
-  position: absolute;
+  margin-top: 35px;
   bottom: 40px;
 `;
 
@@ -222,7 +223,8 @@ function PostWritePage() {
           <label htmlFor=''>내용</label>
           <TextInput
             text='내용을 작성해주세요!'
-            type='input'
+            type='origin'
+            height={100}
             value={content}
             onChange={e => setContent(e.target.value)}
           />

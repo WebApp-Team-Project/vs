@@ -60,6 +60,13 @@ const Wrap = styled.div`
   }
 `;
 
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+`;
+
 function Post(props) {
   const { title, content, timestamp } = props;
 
@@ -87,7 +94,11 @@ function Post(props) {
 
       <Wrap>
         <h1> {title} </h1>
-        <p>{content}</p>
+        <ContentWrapper>
+          {content?.split('\n').map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
+        </ContentWrapper>
       </Wrap>
     </Container>
   );

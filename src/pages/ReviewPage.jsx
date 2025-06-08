@@ -146,7 +146,7 @@ function ReviewPage() {
     [setThumbnail],
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: { 'image/*': [] },
     multiple: false,

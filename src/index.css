@@ -54,4 +54,7 @@
 .h1_title {
   color: var(--light--font);
   font-size: 14px;
+  line-height: 18px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
 }
